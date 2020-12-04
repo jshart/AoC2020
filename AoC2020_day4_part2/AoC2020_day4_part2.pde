@@ -5,7 +5,7 @@ import java.io.IOException;
 String[] lines;
 int totalLines = 0;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day4\\data");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day4_part2\\data");
 
 ArrayList<PassportData> passportList = new ArrayList<PassportData>();
 
@@ -136,35 +136,35 @@ public class PassportData
   {
     if (byr!=null)
     {
-      print("[byr:"+byr+"]");
+      print("[byr="+byr+"]");
     }
     if (iyr!=null)
     {
-      print("[iyr:"+iyr+"]");
+      print("[iyr="+iyr+"]");
     }
     if (eyr!=null)
     {
-      print("[eyr:"+eyr+"]");
+      print("[eyr="+eyr+"]");
     }
     if (hgt!=null)
     {
-      print("[hgt:"+hgt+"]");
+      print("[hgt="+hgt+"]");
     }
     if (hcl!=null)
     {
-      print("[hcl:"+hcl+"]");
+      print("[hcl="+hcl+"]");
     }
     if (ecl!=null)
     {
-      print("[ecl:"+hcl+"]");
+      print("[ecl="+ecl+"]");
     }
     if (pid!=null)
     {
-      print("[pid:"+pid+"]");
+      print("[pid="+pid+"]");
     }
     if (cid!=null)
     {
-      print("[cid:"+cid+"]");
+      print("[cid="+cid+"]");
     }
   }
   
@@ -174,37 +174,118 @@ public class PassportData
     
     if (byr!=null)
     {
-      fieldCheck++;
+      int byrInt = Integer.parseInt(byr);
+      if (byrInt>=1920 && byrInt<=2002)
+      {
+        fieldCheck++;
+      }
+      else
+      {
+        println("bad byr");
+      }     
     }
+    
     if (iyr!=null)
     {
-      fieldCheck++;
+      int iyrInt = Integer.parseInt(iyr);
+      if (iyrInt>=2010 && iyrInt<=2020)
+      {
+        fieldCheck++;
+      }
+      else
+      {
+        println("bad iyr");
+      } 
     }
+    
     if (eyr!=null)
     {
-      fieldCheck++;
+      int eyrInt = Integer.parseInt(eyr);
+      if (eyrInt>=2020 && eyrInt<=2030)
+      {
+        fieldCheck++;
+      }
+      else
+      {
+        println("bad eyr");
+      }
     }
+    
     if (hgt!=null)
     {
-      fieldCheck++;
+      int len=hgt.length();
+      String units=hgt.substring(len-2,len);
+      String amountStr=hgt.substring(0,len-2);
+      int amount=0;
+      if (amountStr.length()>0)
+      {
+        amount=Integer.parseInt(amountStr);
+      }
+      println("unit="+units+" amount="+amount);
+      
+      if (units.equals("cm"))
+      {
+        if (amount>=150 && amount<=193)
+        {
+          fieldCheck++;
+        }
+      }
+      else if (units.equals("in"))
+      {
+        if (amount>=59 && amount <=76)
+        {
+          fieldCheck++;
+        }
+      }
+      else
+      {
+        println("bad hgt");
+      }
     }
+    
     if (hcl!=null)
     {
-      fieldCheck++;
+      if (hcl.matches("#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]"))
+      {
+        fieldCheck++;
+      }
+      else
+      {
+        println("bad hcl");
+      }
     }
+    
     if (ecl!=null)
     {
-      fieldCheck++;
+      if (ecl.equals("amb") || ecl.equals("blu") || ecl.equals("brn") || ecl.equals("gry") || ecl.equals("grn") || ecl.equals("hzl") || ecl.equals("oth"))
+      {
+        fieldCheck++;
+        println("Good ecl="+ecl);
+      }
+      else
+      {
+         println("bad ecl");
+      }
     }
+    
     if (pid!=null)
     {
-      fieldCheck++;
+      if (pid.matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+      {
+        fieldCheck++;
+      }
+      else
+      {
+        println("bad pid");
+      }
     }
+    
     if (cid!=null)
     {
       // ignore, as this is optional
       //fieldCheck++;
     }
+    
     if (fieldCheck==7)
     {
        return(true);
