@@ -6,11 +6,13 @@ int totalCols =0;
 int[][] treeMap;
 
 int playerX=0, playerY=0, playerHits=0;
+int playerRight=1;
+int playerDown=2;
 
-int gridSize=2;
+int gridSize=1;
 
 void setup() {
-  size(2048, 1028);
+  size(1028, 1028);
   background(255,255,255);
   stroke(255);
   frameRate(30);
@@ -30,7 +32,7 @@ void setup() {
     //print(tempPair.pair+" ");
   }
   
-  totalCols = totalLines * 3;
+  totalCols = totalLines * 8;
   
   // ignore the header  
   treeMap = new int[totalCols][totalLines];
@@ -82,17 +84,17 @@ void draw() {
       if (treeMap[x][y]==1)
       {
         stroke(0,255,0);
-        circle(x*gridSize,y*gridSize,gridSize/2);
+        rect(x*gridSize,y*gridSize,gridSize,gridSize);
       }
       if (treeMap[x][y]==2)
       {
         stroke(255,0,0);
-        circle(x*gridSize,y*gridSize,gridSize/2);
+        rect(x*gridSize,y*gridSize,gridSize,gridSize);
       }
     }
   }
-  playerX+=3;
-  playerY+=1;
+  playerX+=playerRight;
+  playerY+=playerDown;
   
   stroke(90,0,255);
   circle(playerX*gridSize,playerY*gridSize,gridSize/2);
