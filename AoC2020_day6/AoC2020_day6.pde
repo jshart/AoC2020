@@ -5,9 +5,9 @@ import java.io.IOException;
 String[] lines;
 int totalLines = 0;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day4\\data");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day6\\data");
 
-ArrayList<PassportData> passportList = new ArrayList<PassportData>();
+ArrayList<CustomsData> customsList = new ArrayList<CustomsData>();
 
 int validPassports;
 
@@ -16,13 +16,13 @@ void setup() {
   background(0);
   stroke(255);
   frameRate(12);
-  
-  //lines = loadStrings("input.txt");
-      System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-  String passportString = new String();
-  PassportData tempPassport;
+  System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
+  String customsString = new String();
+  CustomsData tempCustoms;
+  int rollingTotal=0;
+ 
   try {
     String line;
     
@@ -32,26 +32,15 @@ void setup() {
   
     while ((line=brd.readLine())!=null)
     {
-      //print(line);
-      passportString +=" "+line;
+      customsString +="*"+line;
       
       if (line.length()==0)
       {
-        //print("Calling with: {"+passportString+"}\n");
-        tempPassport = new PassportData(passportString);
-        passportList.add(tempPassport);
+        tempCustoms = new CustomsData(customsString);
+        customsList.add(tempCustoms);
         
-        if (tempPassport.validate()==true)
-        {
-          validPassports++;
-          print("[VALID]");
-        }
-        else
-        {
-          print("[INVALID]");
-        }
-        passportString="";
-        tempPassport.printRecord();
+        customsString="";
+        rollingTotal+=tempCustoms.getAnswers();
         println(); 
       }
     }
@@ -62,153 +51,62 @@ void setup() {
      e.printStackTrace();
   }
   
-  println("Valid Passports:"+validPassports);
+  println("Total Answers:"+rollingTotal);
 }
 
 void draw() {
   noLoop();
 }
 
-public class PassportData
+public class CustomsData
 {
-  String byr;
-  String iyr;
-  String eyr;
-  String hgt;
-  String hcl;
-  String ecl;
-  String pid;
-  String cid;
+  int[] answers= new int[26];
+  int totalAnswers=0;
   
-  public PassportData(String s)
-  {
-    String[] tempPair=s.split(" ");
-    //print(s+"\n");
-    //print("fields:"+temp.length);
-    
-    //print(temp[0]+"#"+temp[1]);
-    
-    int j=0,i=0;
-    
-    for (j=0;j<tempPair.length;j++)
+  public CustomsData(String s)
+  {    
+    int i=0;
+    for (i=0;i<26;i++)
     {
-      String[] temp=tempPair[j].split(":");
-      i=0;
-      //if (temp.length>1)
-      //  println("Processing:"+tempPair[j]+"["+temp[0]+"]"+"["+temp[1]+"]");
+      answers[i]=0;
+    }
+    
+    int len=s.length();
+    int ansIndex=0;
+    int grpMembers=1;
+    
+    // skip the first and last characters for this run as it saves us dealing with extra field deliminators.
+    for (i=1;i<len-1;i++)
+    {
+        if (s.charAt(i)=='*')
+        {
+          grpMembers++;
+        }
+        // 97 is ascii 'a', so this converts a-z in ascii to a decimal number 0-25
+        ansIndex=((int)s.charAt(i))-97;
+        
+        if (ansIndex>=0 && ansIndex<=25)
+        {
+          answers[ansIndex]+=1;
+        }
+    }
+    
+    print("grpMember:"+grpMembers+" raw data:"+s+" "); 
+    for (i=0;i<26;i++)
+    {
+      print(answers[i]);
+      if (answers[i]==grpMembers)
+      {
+         totalAnswers++;
+      }
+    }
+    
 
-      if (temp[i].equals("byr"))
-      {
-        byr=temp[i+1];
-      }
-      if (temp[i].equals("iyr"))
-      {
-        iyr=temp[i+1];
-      }
-      if (temp[i].equals("eyr"))
-      {
-        eyr=temp[i+1];
-      }
-      if (temp[i].equals("hgt"))
-      {
-        hgt=temp[i+1];
-      }
-      if (temp[i].equals("hcl"))
-      {
-        hcl=temp[i+1];
-      }
-      if (temp[i].equals("ecl"))
-      {
-        ecl=temp[i+1];
-      }
-      if (temp[i].equals("pid"))
-      {
-        pid=temp[i+1];
-      }
-      if (temp[i].equals("cid"))
-      {
-        cid=temp[i+1];
-      }
-    }
-  }
-  
-  public void printRecord()
-  {
-    if (byr!=null)
-    {
-      print("[byr:"+byr+"]");
-    }
-    if (iyr!=null)
-    {
-      print("[iyr:"+iyr+"]");
-    }
-    if (eyr!=null)
-    {
-      print("[eyr:"+eyr+"]");
-    }
-    if (hgt!=null)
-    {
-      print("[hgt:"+hgt+"]");
-    }
-    if (hcl!=null)
-    {
-      print("[hcl:"+hcl+"]");
-    }
-    if (ecl!=null)
-    {
-      print("[ecl:"+hcl+"]");
-    }
-    if (pid!=null)
-    {
-      print("[pid:"+pid+"]");
-    }
-    if (cid!=null)
-    {
-      print("[cid:"+cid+"]");
-    }
-  }
-  
-  public boolean validate()
-  { 
-    int fieldCheck=0;
     
-    if (byr!=null)
-    {
-      fieldCheck++;
-    }
-    if (iyr!=null)
-    {
-      fieldCheck++;
-    }
-    if (eyr!=null)
-    {
-      fieldCheck++;
-    }
-    if (hgt!=null)
-    {
-      fieldCheck++;
-    }
-    if (hcl!=null)
-    {
-      fieldCheck++;
-    }
-    if (ecl!=null)
-    {
-      fieldCheck++;
-    }
-    if (pid!=null)
-    {
-      fieldCheck++;
-    }
-    if (cid!=null)
-    {
-      // ignore, as this is optional
-      //fieldCheck++;
-    }
-    if (fieldCheck==7)
-    {
-       return(true);
-    }
-    return(false);
+  }
+  
+  public int getAnswers()
+  { 
+    return(totalAnswers);
   }
 }
