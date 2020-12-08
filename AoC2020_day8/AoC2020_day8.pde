@@ -44,8 +44,24 @@ void setup() {
   }
 
   ProgramCode bootCode = new ProgramCode(lines);
-  bootCode.execute();
   
+  int attempt=0;
+  while (true)
+  {
+    println("ATTEMPT RUN:"+attempt);
+    bootCode.resetCode();
+    bootCode.instructions[attempt].flip();
+    if (attempt>0)
+    {
+      bootCode.instructions[attempt-1].flip();
+    }
+    
+    if (bootCode.execute()==true)
+    {
+      break;
+    }
+    attempt++;
+  }
 }
 
 void draw() {
@@ -57,6 +73,7 @@ public class OpCode
   String instruction;
   int param;
   int hitCount;
+  boolean invertInstruction=false;
   
   public OpCode(String s, int p)
   {
@@ -67,7 +84,36 @@ public class OpCode
   
   void print(String s)
   {
-    println(s+" OPCODE=["+instruction+"] param=["+param+"] hitCount=["+hitCount);
+    println(s+" OPCODE=["+instruction+"] param=["+param+"] hitCount=["+hitCount+"]");
+  }
+  
+  String getInstruction()
+  {
+    if (invertInstruction==false)
+    {
+      return(instruction);
+    }
+    else
+    {
+      print(" INVERTED ");
+      if (instruction.equals("jmp"))
+      {
+        print(" JMP TO NOP");
+        return("nop");
+      }
+      if (instruction.equals("nop"))
+      {
+        print(" NOP TO JMP");
+        return("jmp");
+      }      
+    }
+    
+    return(instruction);
+  }
+  
+  void flip()
+  {
+    invertInstruction=!invertInstruction;
   }
 }
 
@@ -97,37 +143,51 @@ public class ProgramCode
     }
   }
   
-  public void execute()
+  public void resetCode()
+  {
+    int j=0;
+    for (j=0;j<inputLen;j++)
+    {
+      instructions[j].hitCount=0;
+    }
+    pc=0;
+    acc=0;
+  }
+  
+  public boolean execute()
   {
     while (pc<inputLen)
     {
       instructions[pc].hitCount++;
-      instructions[pc].print("EXECUTING");
+      instructions[pc].print("EXECUTING PC=["+pc+"]");
 
       
-      if (instructions[pc].instruction.equals("nop"))
+      if (instructions[pc].getInstruction().equals("nop"))
       {
         // no op - do nothing other than move to next instruction
         pc++;
       }
-      else if (instructions[pc].instruction.equals("jmp"))
+      else if (instructions[pc].getInstruction().equals("jmp"))
       {
+         if (instructions[pc].hitCount>1)
+        {
+          println("SUSPECT INFINTE LOOP - final acc =["+acc+"]");
+          return(false);
+        }
         pc += instructions[pc].param;
       }
-      else if (instructions[pc].instruction.equals("acc"))
+      else if (instructions[pc].getInstruction().equals("acc"))
       {
-        if (instructions[pc].hitCount>1)
-        {
-          println("final ACC="+acc);
-          return;
-        }
+
         acc += instructions[pc].param;
         
         pc++;
       }
-      
-      println("PC=["+pc+"] ACC=["+acc+"]");
+      println();
+      //println("PC=["+pc+"] ACC=["+acc+"]");
     }
+    println("NORMAL EXECUTION EXIT, acc=["+acc+"]");
+    return(true);
   }
   
   
