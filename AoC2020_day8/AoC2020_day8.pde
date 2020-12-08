@@ -8,7 +8,6 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 ArrayList<String> lines = new ArrayList<String>();
 int inputLen=0;
 
-int validPassports;
 
 void setup() {
   size(200, 200);
