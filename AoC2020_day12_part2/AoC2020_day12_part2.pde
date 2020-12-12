@@ -21,7 +21,7 @@ void setup() {
   size(1400, 1400);
   background(0);
   stroke(255);
-  frameRate(10);
+  frameRate(20);
 
   System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
@@ -58,57 +58,33 @@ void setup() {
   int i=0;
   for (i=0;i<numLines;i++)
   {
-    insList.get(i).print();
+    insList.get(i).printInstruction();
+    println();
   }
+  
+  stroke(255,0,0);
+  line(ferry.oldX,ferry.oldY,ferry.x,ferry.y);
+  stroke(0,255,0);
+  circle(ferry.wpX,ferry.wpY,2);
 }
 
 
-void draw() {  
+void draw()
+{  
   if (ferry.pc>=numLines)
   {
     noLoop();
     return;
   }
-  else
-  {
-    //background(0);
-    //stroke(255);
-  
-    stroke(255,0,0);
-    ferry.update(insList.get(ferry.pc));
-    line(ferry.oldX,ferry.oldY,ferry.x,ferry.y);
-    ferry.printBoat();
-  }
-  //for (x=0;x<noCols;x++)
-  //{
-  //  for (y=0;y<noLines;y++)
-  //  {
-  //    if (state1Active==true)
-  //    {
-  //      currentCell=state1[x][y];
-  //    }
-  //    else
-  //    {
-  //      currentCell=state2[x][y];
-  //    }
-      
-  //    if (currentCell>=1)
-  //    {
-  //      stroke(255,0,0);
-  //      fill(255,255,255);
-  //      rect(xoffset+(x*cellSize),yoffset+(y*cellSize),cellSize,cellSize);
-  //      seats++;
-  //    }
-  //    if (currentCell==2)
-  //    {
-  //      stroke(0,244,0);
-  //      fill(0,244,0);
-  //      circle(xoffset+(x*cellSize)+(cellSize/2),yoffset+(y*cellSize)+(cellSize/2),cellSize);
-  //      people++;
-  //    }
-  //  }
-  //}
 
+  //background(0);
+  //stroke(255);
+  
+  ferry.update(insList.get(ferry.pc));
+  stroke(255,0,0);
+  line(ferry.oldX,ferry.oldY,ferry.x,ferry.y);
+  stroke(0,255,0);
+  circle(ferry.wpX,ferry.wpY,2);
 }
 
 public class Instruction
@@ -122,9 +98,9 @@ public class Instruction
     value=Integer.parseInt(s.substring(1));
   }
   
-  public void print()
+  public void printInstruction()
   {
-    println("C="+command+" V="+value);
+    print("C="+command+" V="+value);
   }
 }
 
@@ -136,10 +112,12 @@ public class Boat
   int oldX=startX;
   int oldY=startY;
   
-  int orientation=90; // start facing east - always
   int x=startX;
   int y=startY;
 
+  int orientation=90; // start facing east - always
+  int wpX=10; // starts 10 east, 1 north
+  int wpY=-1;
   
   int pc=0;
   
@@ -149,65 +127,94 @@ public class Boat
   
   public void update(Instruction ins)
   {
+    int dx=0,dy=0;
     oldX=x;
     oldY=y;
     
+    int rotations=0;
+    int i=0;
+    int tx=0,ty=0;
+    
     switch (ins.command)
     {
+      
+      // Move waypoint by absoluate amount
       case 'N':
-        y-=ins.value;
+        wpY-=ins.value;
         break;
       case 'S':
-        y+=ins.value;
+        wpY+=ins.value;
         break;
       case 'E':
-        x+=ins.value;
+        wpX+=ins.value;
         break;
       case 'W':
-        x-=ins.value;
+        wpX-=ins.value;
         break;
+        
+        
       case 'L':
-        orientation-=ins.value;
-        if (orientation<0)
+        switch (ins.value)
         {
-          orientation+=360;
+          case 90:
+            rotations=1;
+            break;
+          case 180:
+            rotations=2;
+            break;
+          case 270:
+            rotations=3;
+            break;
+        }
+        for (i=0;i<rotations;i++)
+        {
+          tx=+wpY;
+          ty=-wpX;
+          wpX=tx;
+          wpY=ty;
         }
         break;
       case 'R':
-        orientation+=ins.value;
-        if (orientation>360)
-        {
-          orientation-=360;
-        }
-        break;
-      case 'F':
-        switch (orientation)
+        switch (ins.value)
         {
           case 90:
-            x+=ins.value;
+            rotations=1;
             break;
           case 180:
-            y+=ins.value;
+            rotations=2;
             break;
           case 270:
-            x-=ins.value;
-            break;
-          case 0:
-          case 360:
-            y-=ins.value;
+            rotations=3;
             break;
         }
+        for (i=0;i<rotations;i++)
+        {
+          tx=-wpY;
+          ty=+wpX;
+          wpX=tx;
+          wpY=ty;
+        }
+        break;    
+      case 'F':
+        // Move to waypoint "value times"
+       
+        // move the boat to the new location, times the value of the instruction
+        x+=wpX*ins.value;
+        y+=wpY*ins.value;
+
       break;
     }
-    
+    printBoat(ins);
     pc++;
   }
   
-  void printBoat()
+  void printBoat(Instruction ins)
   {
     int m=0;
-    print("PC="+pc+" of "+numLines);
+    ins.printInstruction();
+    print(" PC="+pc+" of "+numLines);
     print(" O="+orientation+" X="+x+" Y="+y);
+    print(" WPx="+wpX+" WPy="+wpY);
     // manhatten distance
     m=abs(x-startX)+abs(y-startY);
     println(" M="+m);
