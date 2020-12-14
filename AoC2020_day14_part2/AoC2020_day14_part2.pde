@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.HashMap;
 
 String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day14_part2\\data");
 
@@ -12,6 +12,7 @@ int numLines=0;
 //long[] invertedNumbers = new long[25];
 
 Computer dockingComputer = new Computer();
+HashMap<Long, Long> memoryMap = new HashMap<Long, Long>();
 
 void setup() {
   size(200, 200);
@@ -28,8 +29,8 @@ void setup() {
   try {
     String line;
     
-    File fl = new File(filebase+File.separator+"input2.txt");
-    //File fl = new File(filebase+File.separator+"input.txt");
+    //File fl = new File(filebase+File.separator+"input2.txt");
+    File fl = new File(filebase+File.separator+"input.txt");
 
     FileReader frd = new FileReader(fl);
     BufferedReader brd = new BufferedReader(frd);
@@ -48,7 +49,7 @@ void setup() {
           address=Integer.parseInt(temp[0].substring(4,temp[0].length()-1));
           dockingComputer.updateMaxAddress(address);
           
-          tempCode= new OpCode(temp[0].substring(0,3),address,Integer.parseInt(temp[1]));
+          tempCode= new OpCode(temp[0].substring(0,3),address,Long.parseLong(temp[1]));
 
         }
         else
@@ -75,6 +76,14 @@ void setup() {
   {
     completed=dockingComputer.execute();
   }
+  println("Mem Accesses:"+dockingComputer.memAccesses);
+  
+  Long total=0L;
+  for (Long value : memoryMap.values())
+  {
+    total+=value;
+  }
+  println("total="+total);
 }
 
 
@@ -132,7 +141,7 @@ public class OpCode
   String command;
   int address=0;
   String mask;
-  int value=0;
+  Long value=0L;
 
   char[][] expandedAddresses;
   
@@ -143,7 +152,7 @@ public class OpCode
     mask=v;
   }
   
-  public OpCode(String c, int a, int v)
+  public OpCode(String c, int a, Long v)
   {
     command=c;
     address=a;
@@ -162,17 +171,19 @@ public class OpCode
     }
   }
   
-  public void expandAddress(int a, String m)
+  public int expandAddress(String m)
   {
       String binaryAddress;
 
       // update memory location based on bit mask
-      binaryAddress=Integer.toBinaryString(a);
+      binaryAddress=Integer.toBinaryString(address);
       println(binaryAddress);
       
       int maskLen=m.length();
       int i=0,j=0,l=0,k=0;
       char[] bits = new char[maskLen];
+      
+      Long tempAddress=0L;
       
       // Convert the address to binary & right align to begin with
       for (i=maskLen-1;i>=0;i--)
@@ -267,15 +278,23 @@ public class OpCode
       for (j=0;j<combos;j++)
       {
         temp=new String(expandedAddresses[j]);
-        println("C"+j+":"+temp+" V:"+Integer.parseInt(temp,2));
+        tempAddress=Long.parseLong(temp,2);
+        println("C"+j+":"+temp+" V:"+tempAddress);
+        
+        // store value
+        memoryMap.put(tempAddress,value);
       }
       
       //binaryAddress = String.valueOf(bits);
       //println("Binary Address:"+binaryAddress);
       //a=Integer.parseInt(binaryAddress,2);
       //println(" V:"+a);
+      
+      return(combos);
   }
 }
+
+
 
 public class Computer
 {
@@ -286,6 +305,7 @@ public class Computer
   public String currentMask;
   
   int pc=0;
+  int memAccesses=0;
   
   public Computer()
   {
@@ -294,7 +314,6 @@ public class Computer
   public boolean execute()
   {
     OpCode temp;
-    String binary;
     
     if (pc<opCodes.size())
     {
@@ -304,46 +323,7 @@ public class Computer
       {
         /// update memory location based on bit mask
         print("Updating Memory: ");
-        temp.expandAddress(temp.address,currentMask);
-        //binary=Integer.toBinaryString(temp.value);
-        
-        //int maskLen=currentMask.length();
-        //int i=0,j=0;
-        //char[] bits = new char[maskLen];
-        
-        
-        //for (i=maskLen-1;i>=0;i--)
-        //{
-        //  if (j>=0)
-        //  {
-        //    j=i-(maskLen-binary.length());
-        //    bits[i]=binary.charAt(j);
-        //  }
-        //  else
-        //  {
-        //    bits[i]=0;
-        //  }
-        //}      
-
-        //for (i=maskLen-1;i>=0;i--)
-        //{
-        //  if (currentMask.charAt(i)=='X')
-        //  {
-        //  }
-        //  else if (currentMask.charAt(i)=='1')
-        //  {
-        //    bits[i]='1';
-        //  }
-        //  else if (currentMask.charAt(i)=='0')
-        //  {
-        //    bits[i]='0';
-        //  }
-        //  print("="+bits[i]);
-        //}
-
-        //binary = String.valueOf(bits);
-        //temp.value=Integer.parseInt(binary,2);
-        //println(" V:"+temp.value);
+        memAccesses+=temp.expandAddress(currentMask);
       }
       
       if (temp.command.equals("mas"))
@@ -354,8 +334,12 @@ public class Computer
         println(currentMask);
       }
       pc++;
+      return(false);
     }
-    return(false);
+    else
+    {
+      return(true);
+    }
   }
   
 
