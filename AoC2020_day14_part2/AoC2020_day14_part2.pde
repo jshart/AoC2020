@@ -28,8 +28,8 @@ void setup() {
   try {
     String line;
     
-    //File fl = new File(filebase+File.separator+"input2.txt");
-    File fl = new File(filebase+File.separator+"input.txt");
+    File fl = new File(filebase+File.separator+"input2.txt");
+    //File fl = new File(filebase+File.separator+"input.txt");
 
     FileReader frd = new FileReader(fl);
     BufferedReader brd = new BufferedReader(frd);
@@ -48,7 +48,7 @@ void setup() {
           address=Integer.parseInt(temp[0].substring(4,temp[0].length()-1));
           dockingComputer.updateMaxAddress(address);
           
-          tempCode= new OpCode(temp[0].substring(0,3),address,Long.parseLong(temp[1]));
+          tempCode= new OpCode(temp[0].substring(0,3),address,Integer.parseInt(temp[1]));
 
         }
         else
@@ -75,8 +75,6 @@ void setup() {
   {
     completed=dockingComputer.execute();
   }
-  
-  println("TOTAL="+dockingComputer.sumRam());
 }
 
 
@@ -134,7 +132,7 @@ public class OpCode
   String command;
   int address=0;
   String mask;
-  long value=0L;
+  int value=0;
 
   
   public OpCode(String c, int a, String v)
@@ -144,7 +142,7 @@ public class OpCode
     mask=v;
   }
   
-  public OpCode(String c, int a, Long v)
+  public OpCode(String c, int a, int v)
   {
     command=c;
     address=a;
@@ -166,7 +164,7 @@ public class OpCode
 
 public class Computer
 {
-  public long[] ram;
+  public int[] ram;
   public ArrayList<OpCode> opCodes = new ArrayList<OpCode>();
   public String currentBM;
   public int maxRam=0;
@@ -182,7 +180,6 @@ public class Computer
   {
     OpCode temp;
     String binary;
-    boolean done=true;
     
     if (pc<opCodes.size())
     {
@@ -192,7 +189,7 @@ public class Computer
       {
         /// update memory location based on bit mask
         print("Updating Memory: ");
-        binary=Long.toBinaryString(temp.value);
+        binary=Integer.toBinaryString(temp.value);
         
         int maskLen=currentMask.length();
         int i=0,j=0;
@@ -201,14 +198,14 @@ public class Computer
         
         for (i=maskLen-1;i>=0;i--)
         {
-          j=i-(maskLen-binary.length());
           if (j>=0)
           {
+            j=i-(maskLen-binary.length());
             bits[i]=binary.charAt(j);
           }
           else
           {
-            bits[i]='0';
+            bits[i]=0;
           }
         }      
 
@@ -225,14 +222,12 @@ public class Computer
           {
             bits[i]='0';
           }
+          print("="+bits[i]);
         }
 
         binary = String.valueOf(bits);
-        print("B:="+binary);
-        temp.value=Long.parseLong(binary,2);
+        temp.value=Integer.parseInt(binary,2);
         println(" V:"+temp.value);
-        
-        ram[temp.address]=temp.value;
       }
       
       if (temp.command.equals("mas"))
@@ -243,9 +238,8 @@ public class Computer
         println(currentMask);
       }
       pc++;
-      done=false;
     }
-    return(done);
+    return(false);
   }
   
   public void updateMaxAddress(int a)
@@ -258,20 +252,7 @@ public class Computer
   
   public void initRam()
   {
-    ram=new long[maxRam+1];
-    println("Allocating RAM="+maxRam+1);
-  }
-  
-  public long sumRam()
-  {
-    int l=ram.length;
-    int i=0;
-    long total=0;
-    
-    for (i=0;i<l;i++)
-    {
-      total+=ram[i];
-    }
-    return(total);
+    ram=new int[maxRam];
+    println("Allocating RAM="+maxRam);
   }
 }
