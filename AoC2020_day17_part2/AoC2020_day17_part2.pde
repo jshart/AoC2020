@@ -6,12 +6,13 @@ import java.io.IOException;
 String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day17\\data");
 
 ArrayList<String> lines = new ArrayList<String>();
-int[][][] state1;
-int[][][] state2;
+int[][][][] state1;
+int[][][][] state2;
 boolean state1Active=true;
 int yd=50;
 int xd=50;
 int zd=50;
+int wd=50;
 int iteration=0;
 
 
@@ -57,8 +58,8 @@ void setup() {
   int noLines=lines.size();
   int noCols=lines.get(0).length();
   
-  state1=new int[xd][yd][zd];
-  state2=new int[xd][yd][zd];
+  state1=new int[xd][yd][zd][wd];
+  state2=new int[xd][yd][zd][wd];
 
   
   int i,j;
@@ -66,6 +67,7 @@ void setup() {
   int xo=xd/2;
   int yo=yd/2;
   int zo=zd/2;
+  int wo=wd/2;
   for (i=0;i<noLines;i++)
   {
     println("IN:"+lines.get(i));
@@ -74,11 +76,11 @@ void setup() {
       c=lines.get(i).charAt(j);
       if (c=='#')
       {
-        state1[j+xo][i+yo][zo]=1;
+        state1[j+xo][i+yo][zo][wo]=1;
       }
       else
       {
-        state1[j+xo][i+yo][zo]=0;
+        state1[j+xo][i+yo][zo][wo]=0;
       }
     }
   }
@@ -90,7 +92,7 @@ void setup() {
 void draw() {
   int xoffset=500;
   int yoffset=500;
-  int x=0,y=0,z=0;
+  int x=0,y=0,z=0,w=0;
   int cellSize=4;
   int currentCell=0;
   int seats=0;
@@ -108,40 +110,43 @@ void draw() {
     {
       for (z=0;z<zd;z++)
       {
-        if (state1Active==true)
+        for (w=0;w<wd;w++)
         {
-          currentCell=state1[x][y][z];
-        }
-        else
-        {
-          currentCell=state2[x][y][z];
-        }
-        
-        if (currentCell>=1)
-        {
-          stroke(255,0,0);
-          fill(50,50,50);
-          rect(xoffset+(x*cellSize),yoffset+(y*cellSize),cellSize,cellSize);
+          if (state1Active==true)
+          {
+            currentCell=state1[x][y][z][w];
+          }
+          else
+          {
+            currentCell=state2[x][y][z][w];
+          }
           
-
-          stroke(0,0,255);
-          fill(0,255,255);
-          
-          println("xlate:"+(xoffset+(x*cellSize))+" "+(yoffset+(y*cellSize))+" "+(z*cellSize));
-
-          translate(xoffset+(x*cellSize),yoffset+(y*cellSize),z*cellSize);
-          box(cellSize,cellSize,cellSize);
-          translate(-(xoffset+(x*cellSize)),-(yoffset+(y*cellSize)),-(z*cellSize));
+          if (currentCell>=1)
+          {
+            stroke(255,0,0);
+            fill(50,50,50);
+            rect(xoffset+(x*cellSize),yoffset+(y*cellSize),cellSize,cellSize);
+            
   
-          seats++;
+            stroke(0,0,255);
+            fill(0,255,255);
+            
+            //println("xlate:"+(xoffset+(x*cellSize))+" "+(yoffset+(y*cellSize))+" "+(z*cellSize));
+  
+            translate(xoffset+(x*cellSize),yoffset+(y*cellSize),z*cellSize);
+            box(cellSize,cellSize,cellSize);
+            translate(-(xoffset+(x*cellSize)),-(yoffset+(y*cellSize)),-(z*cellSize));
+    
+            seats++;
+          }
+          //if (currentCell==2)
+          //{
+          //  stroke(0,244,0);
+          //  fill(0,244,0);
+          //  circle(xoffset+(x*cellSize)+(cellSize/2),yoffset+(y*cellSize)+(cellSize/2),cellSize);
+          //  people++;
+          //}
         }
-        //if (currentCell==2)
-        //{
-        //  stroke(0,244,0);
-        //  fill(0,244,0);
-        //  circle(xoffset+(x*cellSize)+(cellSize/2),yoffset+(y*cellSize)+(cellSize/2),cellSize);
-        //  people++;
-        //}
       }
     }
   }
@@ -157,62 +162,64 @@ void draw() {
     {
       for (z=0;z<zd;z++)
       {
-        
-        // Fetch the current cell from the active state matrix
-        // check how many adjacent seats are occupied
-        if (state1Active==true)
+        for (w=0;w<wd;w++)
         {
-          currentCell=state1[x][y][z];
-          neighbourCubes=countNearCubes(state1,x,y,z);
-        }
-        else
-        {
-          currentCell=state2[x][y][z];
-          neighbourCubes=countNearCubes(state2,x,y,z);
-        }
-        
-        //println("oSeats="+oSeats+" ");
-        
-        // check the rules
-        if (currentCell==0)
-        {
-          // empty seat - any adjacent seats empty?
-          if (neighbourCubes==3)
+          // Fetch the current cell from the active state matrix
+          // check how many adjacent seats are occupied
+          if (state1Active==true)
           {
-            // STATE CHANGE
-            currentCell=1;
-            //println("S1 change");
-            occupiedCubes++;
-            stateChanges++;
-          }
-        }
-        else if (currentCell==1)
-        {
-          // occupied seat - any adjacent seats occupied?
-          if (neighbourCubes==2 || neighbourCubes==3)
-          {
-            // STATE CHANGE
-            currentCell=1;
-            occupiedCubes++;
+            currentCell=state1[x][y][z][w];
+            neighbourCubes=countNearCubes(state1,x,y,z,w);
           }
           else
           {
-            currentCell=0;
-            //println("S0 change");
-            stateChanges++;
+            currentCell=state2[x][y][z][w];
+            neighbourCubes=countNearCubes(state2,x,y,z,w);
           }
-        }
-        
-        
-        // set the new state
-        // note - we need to set the*other* state here, so the boolean logic is flipped.
-        if (state1Active==false)
-        {
-          state1[x][y][z]=currentCell;
-        }
-        else
-        {
-          state2[x][y][z]=currentCell;
+          
+          //println("oSeats="+oSeats+" ");
+          
+          // check the rules
+          if (currentCell==0)
+          {
+            // empty seat - any adjacent seats empty?
+            if (neighbourCubes==3)
+            {
+              // STATE CHANGE
+              currentCell=1;
+              //println("S1 change");
+              occupiedCubes++;
+              stateChanges++;
+            }
+          }
+          else if (currentCell==1)
+          {
+            // occupied seat - any adjacent seats occupied?
+            if (neighbourCubes==2 || neighbourCubes==3)
+            {
+              // STATE CHANGE
+              currentCell=1;
+              occupiedCubes++;
+            }
+            else
+            {
+              currentCell=0;
+              //println("S0 change");
+              stateChanges++;
+            }
+          }
+          
+          
+          // set the new state
+          // note - we need to set the*other* state here, so the boolean logic is flipped.
+          if (state1Active==false)
+          {
+            state1[x][y][z][w]=currentCell;
+          }
+          else
+          {
+            state2[x][y][z][w]=currentCell;
+          }
         }
       }
     }
@@ -233,13 +240,14 @@ void draw() {
   iteration++;
 }
 
-int countNearCubes(int[][][] currentState, int x, int y,int z)
+int countNearCubes(int[][][][] currentState, int x, int y,int z,int w)
 {
   int nearCubes=0;
   int checkXStart, checkXEnd;
   int checkYStart, checkYEnd;
   int checkZStart, checkZEnd;
-  int xc=0,yc=0,zc=0;
+  int checkWStart, checkWEnd;
+  int xc=0,yc=0,zc=0,wc=0;
   
   // check neighbour seats - safely, considering array edge cases
   checkXStart=x-1;
@@ -278,6 +286,18 @@ int countNearCubes(int[][][] currentState, int x, int y,int z)
     checkZEnd=yd-1;
   }
 
+  checkWStart=w-1;
+  if (checkWStart<0)
+  {
+    checkWStart=0;
+  }
+  
+  checkWEnd=w+1;
+  if (checkWEnd>=wd)
+  {
+    checkWEnd=wd-1;
+  }
+
   int cubesChecked=0;
 
   for (xc=checkXStart;xc<=checkXEnd;xc++)
@@ -286,19 +306,22 @@ int countNearCubes(int[][][] currentState, int x, int y,int z)
     {
       for (zc=checkZStart;zc<=checkZEnd;zc++)
       {
-  
-        //print(xc+","+yc+" ");
-        cubesChecked++;
-        if (xc==x && yc==y && zc==z)
+        for (wc=checkWStart;wc<=checkWEnd;wc++)
         {
-          // skip the cell itself
-        }
-        else
-        {
-          // check if neighbours are full or not
-          if (currentState[xc][yc][zc]>0)
+    
+          //print(xc+","+yc+" ");
+          cubesChecked++;
+          if (xc==x && yc==y && zc==z && wc==w)
           {
-            nearCubes++;
+            // skip the cell itself
+          }
+          else
+          {
+            // check if neighbours are full or not
+            if (currentState[xc][yc][zc][wc]>0)
+            {
+              nearCubes++;
+            }
           }
         }
       }
