@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day18\\data\\example");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day18\\data\\mydata");
 
 //ArrayList<String> fieldLines = new ArrayList<String>();
 //int numFieldLines=0;
@@ -112,14 +112,26 @@ public class InputFile
   
   public void printFile()
   {
+    long total=0;
+    long temp=0;
+    
     println("CONTENTS FOR:"+fileName);
     int i=0;
     for (i=0;i<numLines;i++)
     {
       println("L"+i+": "+lines.get(i));
       String output=findSubEquations(lines.get(i),0);
-      output=findSubEquations(output,0);
       println("FINAL ANSWER="+output);
+      
+      temp=Long.parseLong(output);
+      if (temp<0)
+      {
+        return;
+      }
+      
+      total+=Long.parseLong(output);
+      
+      println("***CURRENT TOTAL="+total);
       println();
     }
   }
@@ -135,97 +147,116 @@ public class InputFile
     String answer;
     
     String output = new String();
-        
+    
     for (i=0;i<d;i++)
     {
       print("-");
     }
     println("EQ["+s+"]");
     
-    // Look for a start of equation
-    for (i=0;i<s.length();i++)
+    do
     {
-      tempChar=s.charAt(i);
-      
-      // So either resolve the sub equation *and* return the result to the string
-      if (tempChar=='(')
+      anySubsFound=false;
+      // Look for a start of a sub equation
+      for (i=0;i<s.length();i++)
       {
-        startBracketLocation=i+1;
+        tempChar=s.charAt(i);
         
-        // start bracket found - search for pairing close bracket.
-        for (j=startBracketLocation;j<s.length();j++)
+        // Found a sub-equation
+        // So either resolve the sub equation *and* return the result to the string
+        if (tempChar=='(')
         {
-          if (s.charAt(j)=='(')
-          {
-            openBrackets++;
-          }
-          if (s.charAt(j)==')')
-          {
-
-            if (openBrackets==0)
-            {
-              endBracketLocation=j;
-              subEquationFound=true;
-            }
-            else
-            {
-              openBrackets--;
-            }
-          }
-        }
-        if (subEquationFound==true)
-        {
-          i=endBracketLocation;
-          answer=findSubEquations(s.substring(startBracketLocation,endBracketLocation),d+1);          
+          startBracketLocation=i+1;
           
-          output=output.concat(answer);
+          // start bracket found - search for pairing close bracket.
+          for (j=startBracketLocation;j<s.length() && subEquationFound==false;j++)
+          {
+            if (s.charAt(j)=='(')
+            {
+              openBrackets++;
+            }
+            if (s.charAt(j)==')')
+            {
+  
+              if (openBrackets==0)
+              {
+                endBracketLocation=j;
+                subEquationFound=true;
+              }
+              else
+              {
+                openBrackets--;
+              }
+            }
+          }
           
-          anySubsFound=true;
+          // Found a complete subequation as signified by "()"
+          if (subEquationFound==true)
+          {
+            i=endBracketLocation;
+            
+            // resolve the subequation.
+            answer=findSubEquations(s.substring(startBracketLocation,endBracketLocation),d+1);          
+            
+            output=output.concat(answer);
+            
+            //println("ANS CAT=["+output+"]");
+            
+            anySubsFound=true;
+          }
+          subEquationFound=false;
         }
-        subEquationFound=false;
-      }
-      // continue to update the string with anything else
-      else
-      {
-        output=output.concat(Character.toString(tempChar));
-      }
-    }
-    
-    if (anySubsFound==false)
-    {
-      int total=0;
-      String operator="+";     
-      String[] terms = s.split(" ");
-      for (i=0;i<terms.length;i++)
-      {
-        print("{"+terms[i]+"}");
-        if (terms[i].equals("+") || terms[i].equals("-") || terms[i].equals("/") || terms[i].equals("*"))
-        {
-          operator=terms[i];
-        }
+        // continue to update the string with anything else
         else
         {
-          if (operator.equals("+"))
-          {
-            total+= Integer.parseInt(terms[i]);
-          }
-          else if (operator.equals("-"))
-          {
-            total-= Integer.parseInt(terms[i]);
-          }
-          else if (operator.equals("/"))
-          {
-            total/= Integer.parseInt(terms[i]);
-          }
-          else if (operator.equals("*"))
-          {
-            total*= Integer.parseInt(terms[i]);
-          }
+          output=output.concat(Character.toString(tempChar));
         }
       }
-      output=Integer.toString(total);
-    }   
-    println("O["+output+"]");
+      
+      s=output;
+      output=new String();
+      
+      // At this point we've finished resolving this sub-equation
+      // if no futher sub-terms were found, if thats the case resolve
+      // the contents to an answer.
+      if (anySubsFound==false)
+      {
+        long total=0;
+        String operator="+";     
+        String[] terms = s.split(" ");
+        for (i=0;i<terms.length;i++)
+        {
+          //print("{"+terms[i]+"}");
+          if (terms[i].equals("+") || terms[i].equals("-") || terms[i].equals("/") || terms[i].equals("*"))
+          {
+            operator=terms[i];
+          }
+          else
+          {
+            if (operator.equals("+"))
+            {
+              total+= Long.parseLong(terms[i]);
+            }
+            else if (operator.equals("-"))
+            {
+              total-= Long.parseLong(terms[i]);
+            }
+            else if (operator.equals("/"))
+            {
+              total/= Long.parseLong(terms[i]);
+            }
+            else if (operator.equals("*"))
+            {
+              total*= Long.parseLong(terms[i]);
+            }
+          }
+        }
+        output=Long.toString(total);
+      } 
+      //print("P:"+s);
+    } while(anySubsFound==true);
+    
+    //println(" RET["+output+"]");
     return(output);
   }
 }
