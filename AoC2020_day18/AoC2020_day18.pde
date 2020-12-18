@@ -147,7 +147,7 @@ public class InputFile
     String answer;
     
     String output = new String();
-    
+     
     for (i=0;i<d;i++)
     {
       print("-");
