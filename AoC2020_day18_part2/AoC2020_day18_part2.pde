@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day18_part2\\data\\example");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day18_part2\\data\\mydata");
 
 //ArrayList<String> fieldLines = new ArrayList<String>();
 //int numFieldLines=0;
@@ -223,40 +223,108 @@ public class InputFile
       {
         long total=0;
         String operator="+";     
-        String[] terms = s.split(" ");
+        ArrayList<String> termsList = new ArrayList<String>();
+        String[] terms=s.split(" ");
+        println("LP:"+s);
+  
+        
+        // Pass one - collapse additions
         for (i=0;i<terms.length;i++)
         {
-          //print("{"+terms[i]+"}");
-          if (terms[i].equals("+") || terms[i].equals("-") || terms[i].equals("/") || terms[i].equals("*"))
+          termsList.add(terms[i]);
+          println("adding term:"+terms[i]+" to list");
+        }
+        
+        i=0;
+        while (i<termsList.size())
+        {
+          print("A["+i+"]{"+terms[i]+"}");
+
+          if (termsList.get(i).equals("+"))
           {
-            operator=terms[i];
+            total=Long.parseLong(termsList.get(i-1))+Long.parseLong(termsList.get(i+1));
+            print(" SUM="+total);
+            termsList.set(i-1,Long.toString(total));
+            println(" SETTING="+termsList.get(i-1));
+            termsList.remove(i); // remove operator
+            termsList.remove(i); // remove RHS
+            i=0;
           }
           else
           {
-            if (operator.equals("+"))
-            {
-              total+= Long.parseLong(terms[i]);
-            }
-            else if (operator.equals("-"))
-            {
-              total-= Long.parseLong(terms[i]);
-            }
-            else if (operator.equals("/"))
-            {
-              total/= Long.parseLong(terms[i]);
-            }
-            else if (operator.equals("*"))
-            {
-              total*= Long.parseLong(terms[i]);
-            }
+            i++;
           }
+          println();
         }
-        output=Long.toString(total);
+        
+        println("Pass 2 - multiplication starting");
+        for (i=0;i<termsList.size();i++)
+        {
+          println("confirming term:"+termsList.get(i)+" in list");
+        }
+        
+        i=0;
+        while (i<termsList.size())
+        {
+          print("M["+i+"]{"+terms[i]+"}");
+
+          if (termsList.get(i).equals("*"))
+          {
+            total=Long.parseLong(termsList.get(i-1))*Long.parseLong(termsList.get(i+1));
+            print(" SUM="+total);
+            termsList.set(i-1,Long.toString(total));
+            termsList.remove(i); // remove operator
+            termsList.remove(i); // remove RHS
+            i=0;
+          }
+          else
+          {
+            i++;
+          }
+          println();
+        }
+        
+        println("termslist size:="+termsList.size()+" value:="+termsList.get(0));
+        
+        
+        //for (i=0;i<terms.length;i++)
+        //{
+        //  print("["+i+"]{"+terms[i]+"}");
+
+        //  if (terms[i]!=null)
+        //  {
+
+        //    if (terms[i].equals("+") || terms[i].equals("-") || terms[i].equals("/") || terms[i].equals("*"))
+        //    {
+        //      operator=terms[i];
+        //    }
+        //    else
+        //    {
+        //      if (operator.equals("+"))
+        //      {
+        //        total+= Long.parseLong(terms[i]);
+        //      }
+        //      else if (operator.equals("-"))
+        //      {
+        //        total-= Long.parseLong(terms[i]);
+        //      }
+        //      else if (operator.equals("/"))
+        //      {
+        //        total/= Long.parseLong(terms[i]);
+        //      }
+        //      else if (operator.equals("*"))
+        //      {
+        //        total*= Long.parseLong(terms[i]);
+        //      }
+        //    }
+        //  }
+        //}
+        output=termsList.get(0);
       } 
       //print("P:"+s);
     } while(anySubsFound==true);
     
-    //println(" RET["+output+"]");
+    println(" RET["+output+"]");
     return(output);
   }
 }
