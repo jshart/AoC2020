@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day16\\data\\mydata");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day18\\data\\example");
 
 //ArrayList<String> fieldLines = new ArrayList<String>();
 //int numFieldLines=0;
@@ -11,14 +11,8 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 //long[] invertedNumbers = new long[25];
 //HashMap<Long, Long> memoryMap = new HashMap<Long, Long>();
 
-InputFile fieldContents = new InputFile("fields.txt");
-ArrayList<FieldConstraints> fConstraints = new ArrayList<FieldConstraints>();
+InputFile mathContents = new InputFile("input.txt");
 
-InputFile myticketContents = new InputFile("myticket.txt");
-InputFile nearbyticketsContents = new InputFile("nearbytickets.txt");
-
-ArrayList<Integer> invalidNumbers = new ArrayList<Integer>();
-ArrayList<ValidTicket> vTickets = new ArrayList<ValidTicket>();
 
 void setup() {
   size(200, 200);
@@ -28,182 +22,9 @@ void setup() {
 
   System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-  fieldContents.printFile();
-  myticketContents.printFile();
-  nearbyticketsContents.printFile();
-  
-  int i=0,j=0,k=0;
-  
-  for (i=0;i<fieldContents.numLines;i++)
-  {
-    fConstraints.add(new FieldConstraints(fieldContents.lines.get(i)));
-  }
-  
-  println();
-  String currentTicket;
-  for (i=0;i<nearbyticketsContents.numLines;i++)
-  {
-    currentTicket=nearbyticketsContents.lines.get(i);
-    println("checking line..."+currentTicket);
-    if (checkInvalidNumbers(currentTicket)==false)
-    {
-      println("Ticket "+i+" consisting of ["+currentTicket+"] is invalid and should be dropped");
-    }
-    else
-    {
-      vTickets.add(new ValidTicket(currentTicket));
-    }
-  }
-  
-  println();
-  int total=0;
-  for (i=0;i<invalidNumbers.size();i++)
-  {
-    total+=invalidNumbers.get(i);
-    println("Adding Invalid Nunber:"+invalidNumbers.get(i)+" new total="+total);
-  }
-  
-  boolean match;
-  for (k=0;k<fConstraints.size();k++)
-  {
-    // check all fields...
-    for (i=0;i<fConstraints.size();i++)
-    {
-      
-      // lets assume this is valid until proven otherwise.
-      match=true;
-      
-      
-      // for each ticket...
-      for (j=0;j<vTickets.size()&&match==true;j++)
-      {
-        // FIRST value - lets see if we can find a constriant that matches
-        match=fConstraints.get(i).validNumber(vTickets.get(j).contents[k]);
-      }
-      
-      if (match==true)
-      {
-        println("Field:"+k+" matched constraint="+i);
-        fConstraints.get(i).candidateList.add(k);
-      }
-    }
-  }
-  
-  FieldConstraints tempf;
-  
-  println("CANDIDATE LIST:");
-  for (k=0;k<fConstraints.size();k++)
-  {
-    tempf=fConstraints.get(k);
-    print(tempf.name+": ");
-    for (j=0;j<tempf.candidateList.size();j++)
-    {
-      print(tempf.candidateList.get(j)+",");
-    }
-  }
-  
-  println();
-  
-  // Prune candidates
-  boolean done=false;
-  
-  int removeItem=-1;
-  while (done==false)
-  {
-    done=true;
-    
-    // check for any candidate lists that are only 1 long - as that should be locked in
-    for (k=0;k<fConstraints.size();k++)
-    {
-      tempf=fConstraints.get(k);
-      
-      // only one item - this must be locked in.
-      if (tempf.candidateList.size()==1)
-      {
-        if (tempf.confirmed==false)
-        {
-          tempf.confirmed=true;
-          println("LOCKING IN:"+tempf.name+" V:"+tempf.candidateList.get(0));
-          
-          // first time this one was locked in, so lets now go and remove this everywhere
-          removeItem=tempf.candidateList.get(0);
-          break;
-        }
-      }
-    }
-    
-    // check for any lists we can prune
-    for (k=0;k<fConstraints.size();k++)
-    {
-      tempf=fConstraints.get(k);
-
-      if (removeItem>=0)
-      {
-        for (j=0;j<tempf.candidateList.size();j++)
-        {
-          if (tempf.candidateList.get(j)==removeItem && (tempf.candidateList.size()!=1 && tempf.confirmed==false))
-          {
-            tempf.candidateList.remove(j);
-            println("pruning:"+removeItem);
-            
-            // still pruning so not yet done.
-            done=false;
-          }
-        }
-      }
-    }
-  }
-  
-  println("DONE");
-  ValidTicket myticket = new ValidTicket(myticketContents.lines.get(0));
-  for (k=0;k<fConstraints.size();k++)
-  {
-    tempf=fConstraints.get(k);
-    println(tempf.name+" maps to field="+tempf.candidateList.get(0)+" with a value of:"+myticket.contents[tempf.candidateList.get(0)]);
-  }
-  
+  mathContents.printFile();
 }
 
-boolean checkInvalidNumbers(String line)
-{
-  int i=0,j=0;
-  String[] temp;
-  temp=line.split(",");
-  int l = temp.length;
-
-  
-  int numConstraints=fConstraints.size();
-  boolean valid=false;
-  int checkNum=0;
-  
-  // check each number in the ticket...
-  for (i=0;i<l;i++)
-  {
-    valid=false;
-    checkNum=Integer.parseInt(temp[i]);
-    
-    //println("-- Checking Number:"+checkNum);
-    
-    // ... against each constraint
-    for (j=0;j<numConstraints && valid==false;j++)
-    {
-      valid=fConstraints.get(j).validNumber(checkNum);
-    }
-    
-    // if its *still* invalid after each constraint check, then track it as part of our answer
-    if (valid==true)
-    {
-      println("\\-- VALID NUMBER FOUND:"+checkNum);
-    }
-    else
-    {
-      invalidNumbers.add(checkNum);
-      println("\\-- INVALID NUMBER FOUND:"+checkNum);
-      return(false);
-    }
-  }
-  return(true);
-}
 
 
 void draw() {  
@@ -254,84 +75,6 @@ void draw() {
 
 }
 
-public class ValidTicket
-{
-  int[] contents;
-  
-  public ValidTicket(String s)
-  {
-    String[] temp;
-    int l;
-    temp = s.split(",");
-    l=temp.length;
-    
-    contents = new int[l];
-    int i=0;
-    for (i=0;i<l;i++)
-    {
-      contents[i]=Integer.parseInt(temp[i]);
-    }
-  }
-  
-}
-
-public class FieldConstraints
-{
-  public String name;
-  public int[] sRange;
-  public int[] eRange;
-  public int ranges;
-  
-  public ArrayList<Integer> candidateList = new ArrayList<Integer>();
-  public boolean confirmed=false;
-  
-  public FieldConstraints(String line)
-  {
-    String[] temp;
-    String[] temp2;
-    String remainder;
-    temp=line.split(": ");
-    name=temp[0];
-    remainder=temp[1];
-    
-    
-    temp=remainder.split(" or ");
-    ranges=temp.length;
-    int i;
-    
-    sRange = new int[ranges];
-    eRange = new int[ranges];
-    for (i=0;i<ranges;i++)
-    {
-      temp2=temp[i].split("-");
-      //print("RV:"+temp2[0]+","+temp2[1]);
-      sRange[i]=Integer.parseInt(temp2[0]);
-      eRange[i]=Integer.parseInt(temp2[1]);
-    }
-  }
-  
-  boolean validNumber(int v)
-  {
-    int i=0;
-    boolean valid=false;
-    for (i=0;i<ranges;i++)
-    {
-      //print("C="+sRange[i]+":"+eRange[i]);
-      if (v>=sRange[i] && v<=eRange[i])
-      {
-        valid=true;
-        break;
-      }
-      else
-      {
-        valid=false;
-      }
-
-    }
-    //print("R:"+valid);
-    return(valid);
-  }
-}
 
 
 public class InputFile
@@ -374,6 +117,115 @@ public class InputFile
     for (i=0;i<numLines;i++)
     {
       println("L"+i+": "+lines.get(i));
+      String output=findSubEquations(lines.get(i),0);
+      output=findSubEquations(output,0);
+      println("FINAL ANSWER="+output);
+      println();
     }
+  }
+  
+  public String findSubEquations(String s, int d)
+  {
+    int i=0,j=0;
+    int openBrackets=0;
+    int startBracketLocation=0, endBracketLocation=0;
+    boolean subEquationFound=false;
+    boolean anySubsFound=false;
+    char tempChar;
+    String answer;
+    
+    String output = new String();
+        
+    for (i=0;i<d;i++)
+    {
+      print("-");
+    }
+    println("EQ["+s+"]");
+    
+    // Look for a start of equation
+    for (i=0;i<s.length();i++)
+    {
+      tempChar=s.charAt(i);
+      
+      // So either resolve the sub equation *and* return the result to the string
+      if (tempChar=='(')
+      {
+        startBracketLocation=i+1;
+        
+        // start bracket found - search for pairing close bracket.
+        for (j=startBracketLocation;j<s.length();j++)
+        {
+          if (s.charAt(j)=='(')
+          {
+            openBrackets++;
+          }
+          if (s.charAt(j)==')')
+          {
+
+            if (openBrackets==0)
+            {
+              endBracketLocation=j;
+              subEquationFound=true;
+            }
+            else
+            {
+              openBrackets--;
+            }
+          }
+        }
+        if (subEquationFound==true)
+        {
+          i=endBracketLocation;
+          answer=findSubEquations(s.substring(startBracketLocation,endBracketLocation),d+1);          
+          
+          output=output.concat(answer);
+          
+          anySubsFound=true;
+        }
+        subEquationFound=false;
+      }
+      // continue to update the string with anything else
+      else
+      {
+        output=output.concat(Character.toString(tempChar));
+      }
+    }
+    
+    if (anySubsFound==false)
+    {
+      int total=0;
+      String operator="+";     
+      String[] terms = s.split(" ");
+      for (i=0;i<terms.length;i++)
+      {
+        print("{"+terms[i]+"}");
+        if (terms[i].equals("+") || terms[i].equals("-") || terms[i].equals("/") || terms[i].equals("*"))
+        {
+          operator=terms[i];
+        }
+        else
+        {
+          if (operator.equals("+"))
+          {
+            total+= Integer.parseInt(terms[i]);
+          }
+          else if (operator.equals("-"))
+          {
+            total-= Integer.parseInt(terms[i]);
+          }
+          else if (operator.equals("/"))
+          {
+            total/= Integer.parseInt(terms[i]);
+          }
+          else if (operator.equals("*"))
+          {
+            total*= Integer.parseInt(terms[i]);
+          }
+        }
+      }
+      output=Integer.toString(total);
+    }   
+    println("O["+output+"]");
+    return(output);
   }
 }
