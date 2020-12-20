@@ -11,14 +11,10 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 //long[] invertedNumbers = new long[25];
 //HashMap<Long, Long> memoryMap = new HashMap<Long, Long>();
 
-InputFile fieldContents = new InputFile("fields.txt");
-ArrayList<FieldConstraints> fConstraints = new ArrayList<FieldConstraints>();
+InputFile rules = new InputFile("rules_with_loops.txt");
+InputFile input = new InputFile("input.txt");
+ArrayList<ParsedRule> parsedRules = new ArrayList<ParsedRule>();
 
-InputFile myticketContents = new InputFile("myticket.txt");
-InputFile nearbyticketsContents = new InputFile("nearbytickets.txt");
-
-ArrayList<Integer> invalidNumbers = new ArrayList<Integer>();
-ArrayList<ValidTicket> vTickets = new ArrayList<ValidTicket>();
 
 void setup() {
   size(200, 200);
@@ -28,182 +24,48 @@ void setup() {
 
   System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-  fieldContents.printFile();
-  myticketContents.printFile();
-  nearbyticketsContents.printFile();
+  rules.printFile();
+  input.printFile();
+  
+  ParsedRule temp;
   
   int i=0,j=0,k=0;
   
-  for (i=0;i<fieldContents.numLines;i++)
+  for (i=0;i<rules.numLines;i++)
   {
-    fConstraints.add(new FieldConstraints(fieldContents.lines.get(i)));
+    temp=new ParsedRule(rules.lines.get(i));
+    parsedRules.add(temp);
+    temp.printRule();
   }
   
   println();
-  String currentTicket;
-  for (i=0;i<nearbyticketsContents.numLines;i++)
+  
+  int pLen=0;
+  String s;
+  int passed=0;
+  
+  for (i=0;i<input.numLines;i++)
   {
-    currentTicket=nearbyticketsContents.lines.get(i);
-    println("checking line..."+currentTicket);
-    if (checkInvalidNumbers(currentTicket)==false)
+    s=input.lines.get(i);
+
+    println("Testing line:"+input.lines.get(i)+" lenth="+s.length());
+    
+    pLen=parsedRules.get(0).testRule(s,0);
+    
+    if (pLen<0 || pLen<s.length())
     {
-      println("Ticket "+i+" consisting of ["+currentTicket+"] is invalid and should be dropped");
+      println("*** RULE:"+i+" failed"+" processed:"+pLen);
     }
     else
     {
-      vTickets.add(new ValidTicket(currentTicket));
+      println("*** RULE:"+i+" passed"+" processed:"+pLen);
+      passed++;
     }
+    println();
   }
-  
-  println();
-  int total=0;
-  for (i=0;i<invalidNumbers.size();i++)
-  {
-    total+=invalidNumbers.get(i);
-    println("Adding Invalid Nunber:"+invalidNumbers.get(i)+" new total="+total);
-  }
-  
-  boolean match;
-  for (k=0;k<fConstraints.size();k++)
-  {
-    // check all fields...
-    for (i=0;i<fConstraints.size();i++)
-    {
-      
-      // lets assume this is valid until proven otherwise.
-      match=true;
-      
-      
-      // for each ticket...
-      for (j=0;j<vTickets.size()&&match==true;j++)
-      {
-        // FIRST value - lets see if we can find a constriant that matches
-        match=fConstraints.get(i).validNumber(vTickets.get(j).contents[k]);
-      }
-      
-      if (match==true)
-      {
-        println("Field:"+k+" matched constraint="+i);
-        fConstraints.get(i).candidateList.add(k);
-      }
-    }
-  }
-  
-  FieldConstraints tempf;
-  
-  println("CANDIDATE LIST:");
-  for (k=0;k<fConstraints.size();k++)
-  {
-    tempf=fConstraints.get(k);
-    print(tempf.name+": ");
-    for (j=0;j<tempf.candidateList.size();j++)
-    {
-      print(tempf.candidateList.get(j)+",");
-    }
-  }
-  
-  println();
-  
-  // Prune candidates
-  boolean done=false;
-  
-  int removeItem=-1;
-  while (done==false)
-  {
-    done=true;
-    
-    // check for any candidate lists that are only 1 long - as that should be locked in
-    for (k=0;k<fConstraints.size();k++)
-    {
-      tempf=fConstraints.get(k);
-      
-      // only one item - this must be locked in.
-      if (tempf.candidateList.size()==1)
-      {
-        if (tempf.confirmed==false)
-        {
-          tempf.confirmed=true;
-          println("LOCKING IN:"+tempf.name+" V:"+tempf.candidateList.get(0));
-          
-          // first time this one was locked in, so lets now go and remove this everywhere
-          removeItem=tempf.candidateList.get(0);
-          break;
-        }
-      }
-    }
-    
-    // check for any lists we can prune
-    for (k=0;k<fConstraints.size();k++)
-    {
-      tempf=fConstraints.get(k);
-
-      if (removeItem>=0)
-      {
-        for (j=0;j<tempf.candidateList.size();j++)
-        {
-          if (tempf.candidateList.get(j)==removeItem && (tempf.candidateList.size()!=1 && tempf.confirmed==false))
-          {
-            tempf.candidateList.remove(j);
-            println("pruning:"+removeItem);
-            
-            // still pruning so not yet done.
-            done=false;
-          }
-        }
-      }
-    }
-  }
-  
-  println("DONE");
-  ValidTicket myticket = new ValidTicket(myticketContents.lines.get(0));
-  for (k=0;k<fConstraints.size();k++)
-  {
-    tempf=fConstraints.get(k);
-    println(tempf.name+" maps to field="+tempf.candidateList.get(0)+" with a value of:"+myticket.contents[tempf.candidateList.get(0)]);
-  }
-  
+  println("FINAL TOTAL="+passed);
 }
 
-boolean checkInvalidNumbers(String line)
-{
-  int i=0,j=0;
-  String[] temp;
-  temp=line.split(",");
-  int l = temp.length;
-
-  
-  int numConstraints=fConstraints.size();
-  boolean valid=false;
-  int checkNum=0;
-  
-  // check each number in the ticket...
-  for (i=0;i<l;i++)
-  {
-    valid=false;
-    checkNum=Integer.parseInt(temp[i]);
-    
-    //println("-- Checking Number:"+checkNum);
-    
-    // ... against each constraint
-    for (j=0;j<numConstraints && valid==false;j++)
-    {
-      valid=fConstraints.get(j).validNumber(checkNum);
-    }
-    
-    // if its *still* invalid after each constraint check, then track it as part of our answer
-    if (valid==true)
-    {
-      println("\\-- VALID NUMBER FOUND:"+checkNum);
-    }
-    else
-    {
-      invalidNumbers.add(checkNum);
-      println("\\-- INVALID NUMBER FOUND:"+checkNum);
-      return(false);
-    }
-  }
-  return(true);
-}
 
 
 void draw() {  
@@ -254,82 +116,156 @@ void draw() {
 
 }
 
-public class ValidTicket
+public class ParsedRule
 {
-  int[] contents;
+  char finalValue=0;
   
-  public ValidTicket(String s)
+  // currently looks like there is a max of 2 subrules, each of which can be a max of 3 components long
+  int[][] subRules=new int[2][3];
+  int subRulesCount=0;
+  int ruleNumber=0; // pretty sure we can throw this away as we've pre-sorte the list
+  
+  public int testRule(String s, int position)
   {
-    String[] temp;
-    int l;
-    temp = s.split(",");
-    l=temp.length;
+    int consumed=position;
+    int i=0,j=0;
     
-    contents = new int[l];
-    int i=0;
-    for (i=0;i<l;i++)
+    print("["+ruleNumber+"]");
+    for (i=0;i<position;i++)
     {
-      contents[i]=Integer.parseInt(temp[i]);
+      print("-");
     }
-  }
-  
-}
 
-public class FieldConstraints
-{
-  public String name;
-  public int[] sRange;
-  public int[] eRange;
-  public int ranges;
-  
-  public ArrayList<Integer> candidateList = new ArrayList<Integer>();
-  public boolean confirmed=false;
-  
-  public FieldConstraints(String line)
-  {
-    String[] temp;
-    String[] temp2;
-    String remainder;
-    temp=line.split(": ");
-    name=temp[0];
-    remainder=temp[1];
-    
-    
-    temp=remainder.split(" or ");
-    ranges=temp.length;
-    int i;
-    
-    sRange = new int[ranges];
-    eRange = new int[ranges];
-    for (i=0;i<ranges;i++)
+
+    if (consumed>=s.length())
     {
-      temp2=temp[i].split("-");
-      //print("RV:"+temp2[0]+","+temp2[1]);
-      sRange[i]=Integer.parseInt(temp2[0]);
-      eRange[i]=Integer.parseInt(temp2[1]);
+      print("string consumsed - finalising");
+      return(consumed);
     }
-  }
-  
-  boolean validNumber(int v)
-  {
-    int i=0;
-    boolean valid=false;
-    for (i=0;i<ranges;i++)
+    
+    
+    // Final value?
+    if (finalValue>0)
     {
-      //print("C="+sRange[i]+":"+eRange[i]);
-      if (v>=sRange[i] && v<=eRange[i])
+      if (s.charAt(position)==finalValue)
       {
-        valid=true;
-        break;
+         println("MATCH FOUND");
+         consumed++;
       }
       else
       {
-        valid=false;
+        println("FAILED FINAL VALUE CHECK:"+s.charAt(position)+"!="+finalValue);
+        consumed=-1;
       }
-
     }
-    //print("R:"+valid);
-    return(valid);
+    
+    // Save the current location - because if we fail an optional leg, we need to rewind
+    // to here and re-run for other optional legs until we find a match of exhaust all options
+    int savedPoint=consumed;
+
+    for (i=0;i<subRulesCount;i++)
+    {
+      print("TESTING SUBRULE="+i+"[");
+      print(subRules[i][0]+" "+subRules[i][1]+" "+subRules[i][2]);
+      println("]");
+      consumed=savedPoint;
+      
+      // for this rule - check every sub component passes...
+      for (j=0;j<3;j++)
+      {
+        // because sub rules maybe 2 *or* 3 elements long, we pad to 3 with a 0
+        // as we know we cant loop, as 0's found means we're done and we should
+        // bail on the loop.
+        if (subRules[i][j]==0)
+        {
+          break;
+        }
+        
+
+        
+        // call rule checks recursively...
+        consumed=parsedRules.get(subRules[i][j]).testRule(s,consumed);
+        
+        // if the rule failed, then assume this entire subset is invalid
+        // jump to the next...
+        if (consumed<0)
+        {
+          break;
+        }
+      }
+      
+      // if we get here and we've passed sub-rules, then this set is
+      // ok, and we can skip checking any other sub-rules in this.
+      if (consumed>0)
+      {
+        break;  
+      }
+    }
+    return(consumed);
+  }
+  
+  public ParsedRule(String s)
+  {
+    String[] temp;
+    String[] temp2;
+    int i=0,j=0;
+    
+    //println("Parsing:"+s);
+    
+    temp=s.split(": ");
+    ruleNumber=Integer.parseInt(temp[0]);
+    
+    s=temp[1];
+    //println("parsing param string="+s);
+    
+    // if (this has subfields)
+    if (s.indexOf('%')>0)
+    {
+      //println("optional params found");
+      // has more than one optional component.
+      temp=s.split(" % ");
+      
+      // for each optional subrule
+      subRulesCount=temp.length;
+      
+      for (i=0;i<subRulesCount;i++)
+      {
+        //println("testing="+temp[i]+" index="+i);
+
+        // for each optional subrule, lets parse each component
+        temp2=temp[i].split(" ");
+        for (j=0;j<temp2.length;j++)
+        {
+          //println("parsing subcomponet="+temp2[j]);
+          subRules[i][j]=Integer.parseInt(temp2[j]);
+        }
+      }
+    }
+    else if (s.indexOf('a')>0 || s.indexOf('b')>0)
+    {
+      //println("Final value found");
+      finalValue=s.charAt(1);
+    }
+    else
+    {
+      subRulesCount=1;
+      temp2=s.split(" ");
+      for (j=0;j<temp2.length;j++)
+      {
+        //println("parsing subcomponet="+temp2[j]);
+        subRules[0][j]=Integer.parseInt(temp2[j]);
+      }
+    }
+  }
+  
+  void printRule()
+  {
+    int i=0;
+    println("ID="+ruleNumber+" subrules="+subRulesCount+" finalValue="+finalValue);
+    for (i=0;i<subRulesCount;i++)
+    {
+      println("->"+subRules[i][0]+"#"+subRules[i][1]);
+    }
   }
 }
 
