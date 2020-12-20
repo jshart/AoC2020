@@ -1,0 +1,276 @@
+| | | | | | o-FINISHED RULESET=19 with a consumed value of:-1
+| | | | | o-[R:12D:5P:17]<[R:13D:4P:16]<[R:31D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-FINISHED RULESET=12 with a consumed value of:-1
+| | | | o-[R:13D:4P:16]<[R:31D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | o-FINISHED RULESET=13 with a consumed value of:-1
+| | | o-[R:31D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | o-FINISHED RULESET=31 with a consumed value of:-1
+| | o-[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | o-CHECK 1 FOR rule:11 need=3 consumed=10 strlen=40[[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[42 11 31]
+| | | o-CHECK 0 FOR rule:42 need=2 consumed=10 strlen=40[[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+| | | | o-CHECK 0 FOR rule:9 need=2 consumed=10 strlen=40[[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+| | | | | o-[R:14D:5P:10]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 10 char:b
+| | | | | o-CHECK 0 FOR rule:27 need=2 consumed=11 strlen=40[[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 6 0]
+| | | | | | o-[R:1D:6P:11]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | o-[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:27 need=2 consumed=11 strlen=40[[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 18 0]
+| | | | | | o-[R:14D:6P:11]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 11 char:b
+| | | | | | o-CHECK 0 FOR rule:18 need=2 consumed=12 strlen=40[[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 15 0]
+| | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=12 strlen=40[[R:15D:7P:12]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | o-[R:1D:8P:12]<[R:15D:7P:12]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 12 char:a
+| | | | | | | o-FINISHED RULESET=15 with a consumed value of:13
+| | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=13 strlen=40[[R:15D:7P:13]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | o-[R:1D:8P:13]<[R:15D:7P:13]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 13 char:a
+| | | | | | | o-FINISHED RULESET=15 with a consumed value of:14
+| | | | | | o-FINISHED RULESET=18 with a consumed value of:14
+| | | | | o-FINISHED RULESET=27 with a consumed value of:14
+| | | | o-FINISHED RULESET=9 with a consumed value of:14
+| | | | o-[R:14D:4P:14]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | o-[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | o-CHECK 1 FOR rule:42 need=2 consumed=10 strlen=40[[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[10 1 0]
+| | | | o-CHECK 0 FOR rule:10 need=2 consumed=10 strlen=40[[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[23 14 0]
+| | | | | o-CHECK 0 FOR rule:23 need=2 consumed=10 strlen=40[[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[25 1 0]
+| | | | | | o-CHECK 0 FOR rule:25 need=2 consumed=10 strlen=40[[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 1 0]
+| | | | | | | o-[R:1D:7P:10]<[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | o-[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:25 need=2 consumed=10 strlen=40[[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 14 0]
+| | | | | | | o-[R:1D:7P:10]<[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | o-[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-FINISHED RULESET=25 with a consumed value of:-1
+| | | | | o-[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:23 need=2 consumed=10 strlen=40[[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[22 14 0]
+| | | | | | o-CHECK 0 FOR rule:22 need=2 consumed=10 strlen=40[[R:22D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+| | | | | | | o-[R:14D:7P:10]<[R:22D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 10 char:b
+| | | | | | | o-[R:14D:7P:11]<[R:22D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 11 char:b
+| | | | | | o-FINISHED RULESET=22 with a consumed value of:12
+| | | | | | o-[R:14D:6P:12]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | o-[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-FINISHED RULESET=23 with a consumed value of:-1
+| | | | o-[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | o-CHECK 1 FOR rule:10 need=2 consumed=10 strlen=40[[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[28 1 0]
+| | | | | o-CHECK 0 FOR rule:28 need=2 consumed=10 strlen=40[[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[16 1 0]
+| | | | | | o-CHECK 0 FOR rule:16 need=2 consumed=10 strlen=40[[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 1 0]
+| | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=10 strlen=40[[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | o-[R:1D:8P:10]<[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | o-[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-CHECK 1 FOR rule:15 need=1 consumed=10 strlen=40[[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+| | | | | | | | o-[R:14D:8P:10]<[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 10 char:b
+| | | | | | | o-FINISHED RULESET=15 with a consumed value of:11
+| | | | | | | o-[R:1D:7P:11]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | o-[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:16 need=2 consumed=10 strlen=40[[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 14 0]
+| | | | | | | o-[R:14D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 10 char:b
+| | | | | | | o-[R:14D:7P:11]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 11 char:b
+| | | | | | o-FINISHED RULESET=16 with a consumed value of:12
+| | | | | | o-[R:1D:6P:12]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 12 char:a
+| | | | | o-FINISHED RULESET=28 with a consumed value of:13
+| | | | | o-[R:1D:5P:13]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 13 char:a
+| | | | o-FINISHED RULESET=10 with a consumed value of:14
+| | | | o-[R:1D:4P:14]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 14 char:a
+| | | o-FINISHED RULESET=42 with a consumed value of:15
+| | | o-CHECK 0 FOR rule:11 need=2 consumed=15 strlen=40[[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[42 31 0]
+| | | | o-CHECK 0 FOR rule:42 need=2 consumed=15 strlen=40[[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+| | | | | o-CHECK 0 FOR rule:9 need=2 consumed=15 strlen=40[[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+| | | | | | o-[R:14D:6P:15]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | o-[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:9 need=2 consumed=15 strlen=40[[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 26 0]
+| | | | | | o-[R:1D:6P:15]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 15 char:a
+| | | | | | o-CHECK 0 FOR rule:26 need=2 consumed=16 strlen=40[[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 22 0]
+| | | | | | | o-[R:14D:7P:16]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | | o-[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:26 need=2 consumed=16 strlen=40[[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 20 0]
+| | | | | | | o-[R:1D:7P:16]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 16 char:a
+| | | | | | | o-CHECK 0 FOR rule:20 need=2 consumed=17 strlen=40[[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+| | | | | | | | o-[R:14D:8P:17]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | | | o-[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-CHECK 1 FOR rule:20 need=2 consumed=17 strlen=40[[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 15 0]
+| | | | | | | | o-[R:1D:8P:17]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 17 char:a
+| | | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=18 strlen=40[[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | | o-[R:1D:9P:18]<[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | | o-[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | | o-CHECK 1 FOR rule:15 need=1 consumed=18 strlen=40[[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+| | | | | | | | | o-[R:14D:9P:18]<[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 18 char:b
+| | | | | | | | o-FINISHED RULESET=15 with a consumed value of:19
+| | | | | | | o-FINISHED RULESET=20 with a consumed value of:19
+| | | | | | o-FINISHED RULESET=26 with a consumed value of:19
+| | | | | o-FINISHED RULESET=9 with a consumed value of:19
+| | | | | o-[R:14D:5P:19]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 19 char:b
+| | | | o-FINISHED RULESET=42 with a consumed value of:20
+| | | | o-CHECK 0 FOR rule:31 need=2 consumed=20 strlen=40[[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 17 0]
+| | | | | o-[R:14D:5P:20]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 20 char:b
+| | | | | o-CHECK 0 FOR rule:17 need=2 consumed=21 strlen=40[[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 2 0]
+| | | | | | o-[R:14D:6P:21]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 21 char:b
+| | | | | | o-CHECK 0 FOR rule:2 need=2 consumed=22 strlen=40[[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 24 0]
+| | | | | | | o-[R:1D:7P:22]<[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | o-[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:2 need=2 consumed=22 strlen=40[[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 4 0]
+| | | | | | | o-[R:14D:7P:22]<[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 22 char:b
+| | | | | | | o-CHECK 0 FOR rule:4 need=2 consumed=23 strlen=40[[R:4D:7P:23]<[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 1 0]
+| | | | | | | | o-[R:1D:8P:23]<[R:4D:7P:23]<[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 23 char:a
+| | | | | | | | o-[R:1D:8P:24]<[R:4D:7P:23]<[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | o-[R:4D:7P:23]<[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-FINISHED RULESET=4 with a consumed value of:-1
+| | | | | | o-[R:2D:6P:22]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-FINISHED RULESET=2 with a consumed value of:-1
+| | | | | o-[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:17 need=2 consumed=21 strlen=40[[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 7 0]
+| | | | | | o-[R:1D:6P:21]<[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | o-[R:17D:5P:21]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-FINISHED RULESET=17 with a consumed value of:-1
+| | | | o-[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | o-CHECK 1 FOR rule:31 need=2 consumed=20 strlen=40[[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 13 0]
+| | | | | o-[R:1D:5P:20]<[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | o-[R:31D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | o-FINISHED RULESET=31 with a consumed value of:-1
+| | | o-[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | o-CHECK 1 FOR rule:11 need=3 consumed=15 strlen=40[[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[42 11 31]
+| | | | o-CHECK 0 FOR rule:42 need=2 consumed=15 strlen=40[[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+| | | | | o-CHECK 0 FOR rule:9 need=2 consumed=15 strlen=40[[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+| | | | | | o-[R:14D:6P:15]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | o-[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:9 need=2 consumed=15 strlen=40[[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 26 0]
+| | | | | | o-[R:1D:6P:15]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 15 char:a
+| | | | | | o-CHECK 0 FOR rule:26 need=2 consumed=16 strlen=40[[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 22 0]
+| | | | | | | o-[R:14D:7P:16]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | | o-[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:26 need=2 consumed=16 strlen=40[[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 20 0]
+| | | | | | | o-[R:1D:7P:16]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 16 char:a
+| | | | | | | o-CHECK 0 FOR rule:20 need=2 consumed=17 strlen=40[[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+| | | | | | | | o-[R:14D:8P:17]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | | | o-[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-CHECK 1 FOR rule:20 need=2 consumed=17 strlen=40[[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 15 0]
+| | | | | | | | o-[R:1D:8P:17]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 17 char:a
+| | | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=18 strlen=40[[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | | o-[R:1D:9P:18]<[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | | o-[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | | o-CHECK 1 FOR rule:15 need=1 consumed=18 strlen=40[[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+| | | | | | | | | o-[R:14D:9P:18]<[R:15D:8P:18]<[R:20D:7P:17]<[R:26D:6P:16]<[R:9D:5P:15]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 18 char:b
+| | | | | | | | o-FINISHED RULESET=15 with a consumed value of:19
+| | | | | | | o-FINISHED RULESET=20 with a consumed value of:19
+| | | | | | o-FINISHED RULESET=26 with a consumed value of:19
+| | | | | o-FINISHED RULESET=9 with a consumed value of:19
+| | | | | o-[R:14D:5P:19]<[R:42D:4P:15]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 19 char:b
+| | | | o-FINISHED RULESET=42 with a consumed value of:20
+| | | | o-CHECK 0 FOR rule:11 need=2 consumed=20 strlen=40[[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[42 31 0]
+| | | | | o-CHECK 0 FOR rule:42 need=2 consumed=20 strlen=40[[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+| | | | | | o-CHECK 0 FOR rule:9 need=2 consumed=20 strlen=40[[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+| | | | | | | o-[R:14D:7P:20]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 20 char:b
+| | | | | | | o-CHECK 0 FOR rule:27 need=2 consumed=21 strlen=40[[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 6 0]
+| | | | | | | | o-[R:1D:8P:21]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | o-[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-CHECK 1 FOR rule:27 need=2 consumed=21 strlen=40[[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 18 0]
+| | | | | | | | o-[R:14D:8P:21]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 21 char:b
+| | | | | | | | o-CHECK 0 FOR rule:18 need=2 consumed=22 strlen=40[[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 15 0]
+| | | | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=22 strlen=40[[R:15D:9P:22]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | | | o-[R:1D:10P:22]<[R:15D:9P:22]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | | | o-[R:15D:9P:22]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | | | o-CHECK 1 FOR rule:15 need=1 consumed=22 strlen=40[[R:15D:9P:22]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+| | | | | | | | | | o-[R:14D:10P:22]<[R:15D:9P:22]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 22 char:b
+| | | | | | | | | o-FINISHED RULESET=15 with a consumed value of:23
+| | | | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=23 strlen=40[[R:15D:9P:23]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | | | o-[R:1D:10P:23]<[R:15D:9P:23]<[R:18D:8P:22]<[R:27D:7P:21]<[R:9D:6P:20]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 23 char:a
+| | | | | | | | | o-FINISHED RULESET=15 with a consumed value of:24
+| | | | | | | | o-FINISHED RULESET=18 with a consumed value of:24
+| | | | | | | o-FINISHED RULESET=27 with a consumed value of:24
+| | | | | | o-FINISHED RULESET=9 with a consumed value of:24
+| | | | | | o-[R:14D:6P:24]<[R:42D:5P:20]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 24 char:b
+| | | | | o-FINISHED RULESET=42 with a consumed value of:25
+| | | | | o-CHECK 0 FOR rule:31 need=2 consumed=25 strlen=40[[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 17 0]
+| | | | | | o-[R:14D:6P:25]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | o-[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:31 need=2 consumed=25 strlen=40[[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 13 0]
+| | | | | | o-[R:1D:6P:25]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 25 char:a
+| | | | | | o-CHECK 0 FOR rule:13 need=2 consumed=26 strlen=40[[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 3 0]
+| | | | | | | o-[R:14D:7P:26]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 26 char:b
+| | | | | | | o-CHECK 0 FOR rule:3 need=2 consumed=27 strlen=40[[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[5 14 0]
+| | | | | | | | o-CHECK 0 FOR rule:5 need=2 consumed=27 strlen=40[[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 14 0]
+| | | | | | | | | o-[R:1D:9P:27]<[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 27 char:a
+| | | | | | | | | o-[R:14D:9P:28]<[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | | | | o-[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | | o-CHECK 1 FOR rule:5 need=2 consumed=27 strlen=40[[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[15 1 0]
+| | | | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=27 strlen=40[[R:15D:9P:27]<[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | | | o-[R:1D:10P:27]<[R:15D:9P:27]<[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 27 char:a
+| | | | | | | | | o-FINISHED RULESET=15 with a consumed value of:28
+| | | | | | | | | o-[R:1D:9P:28]<[R:5D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 28 char:a
+| | | | | | | | o-FINISHED RULESET=5 with a consumed value of:29
+| | | | | | | | o-[R:14D:8P:29]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | | | o-[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-CHECK 1 FOR rule:3 need=2 consumed=27 strlen=40[[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[16 1 0]
+| | | | | | | | o-CHECK 0 FOR rule:16 need=2 consumed=27 strlen=40[[R:16D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 1 0]
+| | | | | | | | | o-CHECK 0 FOR rule:15 need=1 consumed=27 strlen=40[[R:15D:9P:27]<[R:16D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+| | | | | | | | | | o-[R:1D:10P:27]<[R:15D:9P:27]<[R:16D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 27 char:a
+| | | | | | | | | o-FINISHED RULESET=15 with a consumed value of:28
+| | | | | | | | | o-[R:1D:9P:28]<[R:16D:8P:27]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 28 char:a
+| | | | | | | | o-FINISHED RULESET=16 with a consumed value of:29
+| | | | | | | | o-[R:1D:8P:29]<[R:3D:7P:27]<[R:13D:6P:26]<[R:31D:5P:25]<[R:11D:4P:20]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 29 char:a
+| | | | | | | o-FINISHED RULESET=3 with a consumed value of:30
+| | | | | | o-FINISHED RULESET=13 with a consumed value of:30
+| | | | | o-FINISHED RULESET=31 with a consumed value of:30
+| | | | o-FINISHED RULESET=11 with a consumed value of:30
+| | | | o-CHECK 0 FOR rule:31 need=2 consumed=30 strlen=40[[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 17 0]
+| | | | | o-[R:14D:5P:30]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | o-[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | o-CHECK 1 FOR rule:31 need=2 consumed=30 strlen=40[[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 13 0]
+| | | | | o-[R:1D:5P:30]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 30 char:a
+| | | | | o-CHECK 0 FOR rule:13 need=2 consumed=31 strlen=40[[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 3 0]
+| | | | | | o-[R:14D:6P:31]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | | o-[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:13 need=2 consumed=31 strlen=40[[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 12 0]
+| | | | | | o-[R:1D:6P:31]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 31 char:a
+| | | | | | o-CHECK 0 FOR rule:12 need=2 consumed=32 strlen=40[[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[24 14 0]
+| | | | | | | o-CHECK 0 FOR rule:24 need=2 consumed=32 strlen=40[[R:24D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 1 0]
+| | | | | | | | o-[R:14D:8P:32]<[R:24D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 32 char:b
+| | | | | | | | o-[R:1D:8P:33]<[R:24D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | o-[R:24D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-FINISHED RULESET=24 with a consumed value of:-1
+| | | | | | o-[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:12 need=2 consumed=32 strlen=40[[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[19 1 0]
+| | | | | | | o-CHECK 0 FOR rule:19 need=2 consumed=32 strlen=40[[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 1 0]
+| | | | | | | | o-[R:14D:8P:32]<[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 32 char:b
+| | | | | | | | o-[R:1D:8P:33]<[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | | o-[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | | o-CHECK 1 FOR rule:19 need=2 consumed=32 strlen=40[[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 14 0]
+| | | | | | | | o-[R:14D:8P:32]<[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 32 char:b
+| | | | | | | | o-[R:14D:8P:33]<[R:19D:7P:32]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 33 char:b
+| | | | | | | o-FINISHED RULESET=19 with a consumed value of:34
+| | | | | | | o-[R:1D:7P:34]<[R:12D:6P:32]<[R:13D:5P:31]<[R:31D:4P:30]<[R:11D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 34 char:a
+| | | | | | o-FINISHED RULESET=12 with a consumed value of:35
+| | | | | o-FINISHED RULESET=13 with a consumed value of:35
+| | | | o-FINISHED RULESET=31 with a consumed value of:35
+| | | o-FINISHED RULESET=11 with a consumed value of:35
+| | | o-CHECK 0 FOR rule:31 need=2 consumed=35 strlen=40[[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 17 0]
+| | | | o-[R:14D:4P:35]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | o-[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | o-CHECK 1 FOR rule:31 need=2 consumed=35 strlen=40[[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 13 0]
+| | | | o-[R:1D:4P:35]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 35 char:a
+| | | | o-CHECK 0 FOR rule:13 need=2 consumed=36 strlen=40[[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 3 0]
+| | | | | o-[R:14D:5P:36]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:a!=b
+| | | | o-[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | o-CHECK 1 FOR rule:13 need=2 consumed=36 strlen=40[[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 12 0]
+| | | | | o-[R:1D:5P:36]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 36 char:a
+| | | | | o-CHECK 0 FOR rule:12 need=2 consumed=37 strlen=40[[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[24 14 0]
+| | | | | | o-CHECK 0 FOR rule:24 need=2 consumed=37 strlen=40[[R:24D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 1 0]
+| | | | | | | o-[R:14D:7P:37]<[R:24D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 37 char:b
+| | | | | | | o-[R:1D:7P:38]<[R:24D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | o-[R:24D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-FINISHED RULESET=24 with a consumed value of:-1
+| | | | | o-[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | o-CHECK 1 FOR rule:12 need=2 consumed=37 strlen=40[[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[19 1 0]
+| | | | | | o-CHECK 0 FOR rule:19 need=2 consumed=37 strlen=40[[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 1 0]
+| | | | | | | o-[R:14D:7P:37]<[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 37 char:b
+| | | | | | | o-[R:1D:7P:38]<[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} **** FAILED FINAL VALUE CHECK:b!=a
+| | | | | | o-[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}first rule failed, trying next
+| | | | | | o-CHECK 1 FOR rule:19 need=2 consumed=37 strlen=40[[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 14 0]
+| | | | | | | o-[R:14D:7P:37]<[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 37 char:b
+| | | | | | | o-[R:14D:7P:38]<[R:19D:6P:37]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 38 char:b
+| | | | | | o-FINISHED RULESET=19 with a consumed value of:39
+| | | | | | o-[R:1D:6P:39]<[R:12D:5P:37]<[R:13D:4P:36]<[R:31D:3P:35]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP} ==== MATCH FOUND at 39 char:a
+| | | | | o-FINISHED RULESET=12 with a consumed value of:40
+| | | | o-FINISHED RULESET=13 with a consumed value of:40
+| | | o-FINISHED RULESET=31 with a consumed value of:40
+| | o-FINISHED RULESET=11 with a consumed value of:40
+| | o-[R:31D:2P:40]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}string consumed - finalising at depth=2 called for rule:31 with c:40 and strlen=40 unresolvedTerms=1
+| o-FINISHED RULESET=11 with a consumed value of:40
+o-FINISHED RULESET=0 with a consumed value of:40
+*** RULE:0 passed processed:40
+

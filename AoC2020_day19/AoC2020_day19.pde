@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day19\\data\\mydata");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day19\\data\\example2");
 
 //ArrayList<String> fieldLines = new ArrayList<String>();
 //int numFieldLines=0;
@@ -12,7 +12,10 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 //HashMap<Long, Long> memoryMap = new HashMap<Long, Long>();
 
 InputFile rules = new InputFile("rules_with_loops.txt");
-InputFile input = new InputFile("input.txt");
+//InputFile rules = new InputFile("rules_sorted.txt");
+InputFile input = new InputFile("badInputSingle.txt");
+// InputFile input = new InputFile("goodInputSingle.txt");
+//InputFile input = new InputFile("input.txt");
 ArrayList<ParsedRule> parsedRules = new ArrayList<ParsedRule>();
 
 
@@ -50,7 +53,7 @@ void setup() {
 
     println("Testing line:"+input.lines.get(i)+" lenth="+s.length());
     
-    pLen=parsedRules.get(0).testRule(s,0);
+    pLen=parsedRules.get(0).testRule(s,0,0,"{TOP}");
     
     if (pLen<0 || pLen<s.length())
     {
@@ -61,7 +64,7 @@ void setup() {
       println("*** RULE:"+i+" passed"+" processed:"+pLen);
       passed++;
     }
-    println();
+    println(s);
   }
   println("FINAL TOTAL="+passed);
 }
@@ -69,50 +72,7 @@ void setup() {
 
 
 void draw() {  
-  //if (ferry.pc>=numLines)
-  //{
-  //  noLoop();
-  //  return;
-  //}
-  //else
-  //{
-  //  //background(0);
-  //  //stroke(255);
-  
-  //  stroke(255,0,0);
-  //  ferry.update(insList.get(ferry.pc));
-  //  line(ferry.oldX,ferry.oldY,ferry.x,ferry.y);
-  //  ferry.printBoat();
-  //}
-  //for (x=0;x<noCols;x++)
-  //{
-  //  for (y=0;y<noLines;y++)
-  //  {
-  //    if (state1Active==true)
-  //    {
-  //      currentCell=state1[x][y];
-  //    }
-  //    else
-  //    {
-  //      currentCell=state2[x][y];
-  //    }
-      
-  //    if (currentCell>=1)
-  //    {
-  //      stroke(255,0,0);
-  //      fill(255,255,255);
-  //      rect(xoffset+(x*cellSize),yoffset+(y*cellSize),cellSize,cellSize);
-  //      seats++;
-  //    }
-  //    if (currentCell==2)
-  //    {
-  //      stroke(0,244,0);
-  //      fill(0,244,0);
-  //      circle(xoffset+(x*cellSize)+(cellSize/2),yoffset+(y*cellSize)+(cellSize/2),cellSize);
-  //      people++;
-  //    }
-  //  }
-  //}
+
 
 }
 
@@ -124,74 +84,131 @@ public class ParsedRule
   int[][] subRules=new int[2][3];
   int subRulesCount=0;
   int ruleNumber=0; // pretty sure we can throw this away as we've pre-sorte the list
+ 
+  public void printTree(int d)
+  {
+    int k=0;
+    for (k=0;k<d;k++)
+    {
+      print("| ");
+    }
+    print("o-");
+  }
   
-  public int testRule(String s, int position)
+  public int testRule(String s, int position,int d, String callingR)
   {
     int consumed=position;
-    int i=0,j=0;
+    int i=0,j=0,k=0;
     
-    print("["+ruleNumber+"]");
-    for (i=0;i<position;i++)
-    {
-      print("-");
-    }
-
-
-    if (consumed>=s.length())
-    {
-      print("string consumsed - finalising");
-      return(consumed);
-    }
+    String r=new String("[R:"+ruleNumber+"D:"+d+"P:"+position+"]<"+callingR+"");
+ 
+    //if (consumed==s.length())
+    //{
+    //  printTree(d);
+    //  println(r+"string consumed - finalising at depth="+d+" called for rule:"+ruleNumber+" with c:"+consumed+" and strlen="+s.length());
+    //  return(consumed);
+    //}
+    //else if (consumed>s.length())
+    //{
+    //  printTree(d);
+    //  println(r+"string consumed - finalising at depth="+d+" called for rule:"+ruleNumber+" with c:"+consumed+" and strlen="+s.length());
+    //  return(-1);
+    //}
     
     
     // Final value?
     if (finalValue>0)
     {
+      printTree(d);
+      
       if (s.charAt(position)==finalValue)
       {
-         println("MATCH FOUND");
+         println(r+" ==== MATCH FOUND at "+position+" char:"+s.charAt(position));
+         
+         if (position==s.length()-1)
+         {
+           println("COMPLETE STRING FOUND");
+         }
          consumed++;
       }
       else
       {
-        println("FAILED FINAL VALUE CHECK:"+s.charAt(position)+"!="+finalValue);
+        println(r+" **** FAILED FINAL VALUE CHECK:"+s.charAt(position)+"!="+finalValue);
         consumed=-1;
       }
+      return(consumed);
     }
     
     // Save the current location - because if we fail an optional leg, we need to rewind
     // to here and re-run for other optional legs until we find a match of exhaust all options
     int savedPoint=consumed;
 
+    // For each possible subrule...
     for (i=0;i<subRulesCount;i++)
     {
-      print("TESTING SUBRULE="+i+"[");
-      print(subRules[i][0]+" "+subRules[i][1]+" "+subRules[i][2]);
-      println("]");
-      consumed=savedPoint;
+      int nonZero=0;
       
-      // for this rule - check every sub component passes...
+      // do we have enough characters left to execute rule set?
       for (j=0;j<3;j++)
       {
-        // because sub rules maybe 2 *or* 3 elements long, we pad to 3 with a 0
-        // as we know we cant loop, as 0's found means we're done and we should
-        // bail on the loop.
-        if (subRules[i][j]==0)
+        if (subRules[i][j]!=0)
         {
-          break;
+          nonZero++;
         }
-        
+      }
+      
+      // ensure we're starting from the save point (unnecessary for first pass, but needed for subsequent)
+      consumed=savedPoint;
+      
+      // if there is something to check - print it
+      if (nonZero>0)
+      {
+        printTree(d);
+        print("CHECK "+i+ " FOR rule:"+ruleNumber+" need="+nonZero+" consumed="+consumed+" strlen="+s.length());      
+        print("["+r+"] checking  SUBRULE="+i+"[");
+        print(subRules[i][0]+" "+subRules[i][1]+" "+subRules[i][2]);
+        println("]");
+      }
+      
+      // are there enough characters left to satisfy the subcomponents?
+      if (s.length()>consumed+nonZero)
+      {
+      
 
-        
-        // call rule checks recursively...
-        consumed=parsedRules.get(subRules[i][j]).testRule(s,consumed);
-        
-        // if the rule failed, then assume this entire subset is invalid
-        // jump to the next...
-        if (consumed<0)
-        {
-          break;
+        // for this rule - check every sub component passes...
+        for (j=0;j<3;j++)
+        { 
+          // because sub rules maybe 2 *or* 3 elements long, we pad to 3 with a 0
+          // as we know we cant loop, as 0's found means we're done and we should
+          // bail on the loop.
+          if (subRules[i][j]==0)
+          {
+            break;
+          }
+            
+          //if (consumed>=s.length())
+          //{
+          //  printTree(d);
+          //  println(r+"string consumed - finalising at depth="+d+" called for rule:"+ruleNumber+" with c:"+consumed+" and strlen="+s.length());
+          //  return(-1);
+          //}  
+            
+          // call rule checks recursively...
+          consumed=parsedRules.get(subRules[i][j]).testRule(s,consumed,d+1,r);
+          
+          // if the rule failed, then assume this entire subset is invalid
+          // jump to the next...
+          if (consumed<0)
+          {
+            break;
+          }
         }
+      
+      }
+      else
+      {
+        // rulef failed - as not enough string left to satisfy remaining terms
+        consumed=-1;
       }
       
       // if we get here and we've passed sub-rules, then this set is
@@ -200,7 +217,15 @@ public class ParsedRule
       {
         break;  
       }
+      else
+      {
+        // if consumed is less than 0 at this point, it means something went wrong in one of the sub rules, so we need to check the next.
+        printTree(d);
+        println(r+"first rule failed, trying next");
+      }
     }
+    printTree(d);
+    println("FINISHED RULESET="+ruleNumber+" with a consumed value of:"+consumed);
     return(consumed);
   }
   
