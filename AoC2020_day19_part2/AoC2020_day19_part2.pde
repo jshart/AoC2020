@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day19_part2\\data\\example2");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day19_part2\\data\\mydata");
 
 //ArrayList<String> fieldLines = new ArrayList<String>();
 //int numFieldLines=0;
@@ -13,9 +13,9 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 
 InputFile rules = new InputFile("rules_with_loops.txt");
 //InputFile rules = new InputFile("rules_sorted.txt");
-InputFile input = new InputFile("badInputSingle.txt");
-// InputFile input = new InputFile("goodInputSingle.txt");
-//InputFile input = new InputFile("input.txt");
+//InputFile input = new InputFile("badInputSingle.txt");
+//InputFile input = new InputFile("goodInputSingle.txt");
+InputFile input = new InputFile("input.txt");
 ArrayList<ParsedRule> parsedRules = new ArrayList<ParsedRule>();
 
 
@@ -43,9 +43,10 @@ void setup() {
   
   println();
   
-  int pLen=0;
   String s;
   int passed=0;
+  
+  RuleStatus returnStatus;
   
   for (i=0;i<input.numLines;i++)
   {
@@ -53,17 +54,17 @@ void setup() {
 
     println("Testing line:"+input.lines.get(i)+" lenth="+s.length());
     
-    parsedRules.get(0).testRule(s,0,0,"{TOP}");
+    returnStatus=parsedRules.get(0).testRule(s,0,0,"{TOP}");
 
     println();
-    if (pLen<0 || pLen<s.length())
+    if (returnStatus.passed==true)
     {
-      println("*** RULE:"+i+" failed"+" processed:"+pLen);
+      println("*** RULE:"+i+" passed"+" processed:"+returnStatus.consumed+" input:"+s);
+      passed++;
     }
     else
     {
-      println("*** RULE:"+i+" passed"+" processed:"+pLen);
-      passed++;
+      println("*** RULE:"+i+" failed"+" processed:"+returnStatus.consumed+" input:"+s);
     }
     println(s);
   }
@@ -75,6 +76,16 @@ void setup() {
 void draw() {  
 
 
+}
+
+public class RuleStatus
+{
+  public int consumed=0;
+  public boolean passed=false;
+  
+  public RuleStatus()
+  {
+  }
 }
 
 public class ParsedRule
@@ -101,65 +112,130 @@ public class ParsedRule
   
   
   // TODO: Partially implemented - need to fix the position increment...  
-  public boolean testRule(String s, int position,int d, String callingR)
+  public RuleStatus testRule(String s, int position,int d, String callingR)
   {
     int i=0;
-    boolean passed=false;
+    
+    RuleStatus returnStatus = new RuleStatus();
+    returnStatus.consumed=position;
+    
+    boolean debug=true;
     
     // tight loop/recursion protection
     if (d>10)
     {
-      return(false);
+      returnStatus.passed=false;
+      return(returnStatus);
     }
 
-    printTree(d);
-    print("Testing rule:"+ruleNumber+" "+getSubRules());
+    if (debug)
+    {
+      printTree(d);
+      print("Testing rule:"+ruleNumber+" "+getSubRules());
+    }
     
     // test to see if this matches a final value
     if (finalValue>0)
     {
+      //if (position<s.length() && s.charAt(position)==finalValue)
+      //{
+      if (position>=s.length())
+      {
+                returnStatus.consumed=position;
+        returnStatus.passed=true;
+        println();
+                return(returnStatus);
+
+      }
       if (s.charAt(position)==finalValue)
       {
         // MATCH
-        println("MATCH SUCCEED="+finalValue);
-        passed=true;
-        return(passed);
+        position++;
+        returnStatus.consumed=position;
+        returnStatus.passed=true;
+        
+        if (debug)
+        {
+          println("MATCH SUCCEED="+s.substring(0,position));
+          printTree(d);
+          println("Rule:"+ruleNumber+" exiting through successful match");
+        }
+        
+        return(returnStatus);
       }
       else
       {
         // Not a MATCH
-        println("MATCH FAILED="+finalValue);
-        passed=false;
-        return(passed);
+        returnStatus.passed=false;
+        
+        if (debug)
+        {
+          println("MATCH FAILED="+finalValue);
+          printTree(d);
+          println("Rule:"+ruleNumber+" exiting through failed match");
+        }
+        return(returnStatus);
       }
     }
     
-    println();
+    if (debug)
+    {
+      println();
+    }
     
-    passed=true;
+    returnStatus.passed=true;
+    
+    int rollBack=position;
+    
     // test all left conditions
     if (leftCount>0)
     {
-      for (i=0;i<leftCount && passed==true;i++)
+      for (i=0;i<leftCount && returnStatus.passed==true;i++)
       {
-        passed=parsedRules.get(left[i]).testRule(s,position,d+1,callingR);  
+        returnStatus=parsedRules.get(left[i]).testRule(s,position,d+1,callingR);
+        position=returnStatus.consumed;
       }
     }
     
     // Only execute the right hand side if the left hand failed
-    if (passed==false)
+    if (returnStatus.passed==false)
     {
-      passed=true;
+      if (debug)
+      {
+        printTree(d);
+        println("Rule:"+ruleNumber+" failed LHC, moving to RHC");
+      }
+      
+      // roll back as the previous ruleset failed
+      position=rollBack;
+      
       // test all right conditions if the left failed
       if (rightCount>0)
       {
-        for (i=0;i<rightCount && passed==true;i++)
+        // we have right hand rules. so lets assumed they pass until they fail.
+        returnStatus.passed=true;
+
+        for (i=0;i<rightCount && returnStatus.passed==true;i++)
         {
-          passed=parsedRules.get(right[i]).testRule(s,position,d+1,callingR);  
+          returnStatus=parsedRules.get(right[i]).testRule(s,position,d+1,callingR);  
+          position=returnStatus.consumed;
         }
       }
     }
-    return(passed);
+    
+    // roll back to previous ruleset as last right rule set also failed.
+    if (returnStatus.passed==false)
+    {
+      position=rollBack;
+    }
+    
+    if (debug)
+    {
+      printTree(d);
+      println("Rule:"+ruleNumber+" exiting through completed all subrules with status:"+returnStatus.passed);
+    }
+    
+    return(returnStatus);
   }
   
   public ParsedRule(String s)
