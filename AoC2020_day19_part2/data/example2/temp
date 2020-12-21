@@ -1,0 +1,231 @@
+Testing line:aaaabbaaaabbaaa lenth=15
+\[[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[8 11 0]
+*** NON ZERO CHECK*** need=2 consumed=0 strlen=15
+\-[[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[42 0 0]
+*** NON ZERO CHECK*** need=1 consumed=0 strlen=15
+\--[[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+*** NON ZERO CHECK*** need=2 consumed=0 strlen=15
+\---[[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+*** NON ZERO CHECK*** need=2 consumed=0 strlen=15
+\----[R:14D:4P:0]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 26 0]
+*** NON ZERO CHECK*** need=2 consumed=0 strlen=15
+\----[R:1D:4P:0]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}MATCH FOUND at 0 char:a
+\----[[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 22 0]
+*** NON ZERO CHECK*** need=2 consumed=1 strlen=15
+\-----[R:14D:5P:1]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\----[[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 20 0]
+*** NON ZERO CHECK*** need=2 consumed=1 strlen=15
+\-----[R:1D:5P:1]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}MATCH FOUND at 1 char:a
+\-----[[R:20D:5P:2]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=2 strlen=15
+\------[R:14D:6P:2]<[R:20D:5P:2]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\-----[[R:20D:5P:2]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 15 0]
+*** NON ZERO CHECK*** need=2 consumed=2 strlen=15
+\------[R:1D:6P:2]<[R:20D:5P:2]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}MATCH FOUND at 2 char:a
+\------[[R:15D:6P:3]<[R:20D:5P:2]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+*** NON ZERO CHECK*** need=1 consumed=3 strlen=15
+\-------[R:1D:7P:3]<[R:15D:6P:3]<[R:20D:5P:2]<[R:26D:4P:1]<[R:9D:3P:0]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}MATCH FOUND at 3 char:a
+\---[R:14D:3P:4]<[R:42D:2P:0]<[R:8D:1P:0]<[R:0D:0P:0]<{TOP}MATCH FOUND at 4 char:b
+\-[[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[42 31 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\--[[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\---[[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[R:14D:4P:5]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 5 char:b
+\----[[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 6 0]
+*** NON ZERO CHECK*** need=2 consumed=6 strlen=15
+\-----[R:1D:5P:6]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 6 char:a
+\-----[[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=7 strlen=15
+\------[R:14D:6P:7]<[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\-----[[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 14 0]
+*** NON ZERO CHECK*** need=2 consumed=7 strlen=15
+\------[R:1D:6P:7]<[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 7 char:a
+\------[R:14D:6P:8]<[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\----[[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 18 0]
+*** NON ZERO CHECK*** need=2 consumed=6 strlen=15
+\-----[R:14D:5P:6]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 26 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[R:1D:4P:5]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\--[[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[10 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\---[[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[23 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[25 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\-----[[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[R:1D:6P:5]<[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\-----[[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[R:1D:6P:5]<[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\----[[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[22 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\-----[[R:22D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[R:14D:6P:5]<[R:22D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 5 char:b
+\------[R:14D:6P:6]<[R:22D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[28 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[16 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\-----[[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+*** NON ZERO CHECK*** need=1 consumed=5 strlen=15
+\-------[R:1D:7P:5]<[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\------[[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+*** NON ZERO CHECK*** need=1 consumed=5 strlen=15
+\-------[R:14D:7P:5]<[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 5 char:b
+\------[R:1D:6P:6]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 6 char:a
+\-----[R:1D:5P:7]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 7 char:a
+\----[R:1D:4P:8]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 8 char:a
+\---[R:1D:3P:9]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 9 char:a
+\--[[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 17 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\---[R:14D:3P:10]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 10 char:b
+\---[[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 2 0]
+*** NON ZERO CHECK*** need=2 consumed=11 strlen=15
+\----[R:14D:4P:11]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 11 char:b
+\----[[R:2D:4P:12]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 24 0]
+*** NON ZERO CHECK*** need=2 consumed=12 strlen=15
+\-----[R:1D:5P:12]<[R:2D:4P:12]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 12 char:a
+\-----[[R:24D:5P:13]<[R:2D:4P:12]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 1 0]
+*** NON ZERO CHECK*** need=2 consumed=13 strlen=15
+\------[R:14D:6P:13]<[R:24D:5P:13]<[R:2D:4P:12]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\----[[R:2D:4P:12]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 4 0]
+*** NON ZERO CHECK*** need=2 consumed=12 strlen=15
+\-----[R:14D:5P:12]<[R:2D:4P:12]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 7 0]
+*** NON ZERO CHECK*** need=2 consumed=11 strlen=15
+\----[R:1D:4P:11]<[R:17D:3P:11]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\--[[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 13 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\---[R:1D:3P:10]<[R:31D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\-[[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[42 11 31]
+*** NON ZERO CHECK*** need=3 consumed=5 strlen=15
+\--[[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\---[[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[R:14D:4P:5]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 5 char:b
+\----[[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 6 0]
+*** NON ZERO CHECK*** need=2 consumed=6 strlen=15
+\-----[R:1D:5P:6]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 6 char:a
+\-----[[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=7 strlen=15
+\------[R:14D:6P:7]<[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\-----[[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 14 0]
+*** NON ZERO CHECK*** need=2 consumed=7 strlen=15
+\------[R:1D:6P:7]<[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 7 char:a
+\------[R:14D:6P:8]<[R:6D:5P:7]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\----[[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 18 0]
+*** NON ZERO CHECK*** need=2 consumed=6 strlen=15
+\-----[R:14D:5P:6]<[R:27D:4P:6]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 26 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[R:1D:4P:5]<[R:9D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\--[[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[10 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\---[[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[23 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[25 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\-----[[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[R:1D:6P:5]<[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\-----[[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[R:1D:6P:5]<[R:25D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\----[[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[22 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\-----[[R:22D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[R:14D:6P:5]<[R:22D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 5 char:b
+\------[R:14D:6P:6]<[R:22D:5P:5]<[R:23D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[28 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\----[[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[16 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\-----[[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 1 0]
+*** NON ZERO CHECK*** need=2 consumed=5 strlen=15
+\------[[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+*** NON ZERO CHECK*** need=1 consumed=5 strlen=15
+\-------[R:1D:7P:5]<[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\------[[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+*** NON ZERO CHECK*** need=1 consumed=5 strlen=15
+\-------[R:14D:7P:5]<[R:15D:6P:5]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 5 char:b
+\------[R:1D:6P:6]<[R:16D:5P:5]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 6 char:a
+\-----[R:1D:5P:7]<[R:28D:4P:5]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 7 char:a
+\----[R:1D:4P:8]<[R:10D:3P:5]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 8 char:a
+\---[R:1D:3P:9]<[R:42D:2P:5]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 9 char:a
+\--[[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[42 31 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\---[[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[9 14 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\----[[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 27 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-----[R:14D:5P:10]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 10 char:b
+\-----[[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 6 0]
+*** NON ZERO CHECK*** need=2 consumed=11 strlen=15
+\------[R:1D:6P:11]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\-----[[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 18 0]
+*** NON ZERO CHECK*** need=2 consumed=11 strlen=15
+\------[R:14D:6P:11]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 11 char:b
+\------[[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 15 0]
+*** NON ZERO CHECK*** need=2 consumed=12 strlen=15
+\-------[[R:15D:7P:12]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+*** NON ZERO CHECK*** need=1 consumed=12 strlen=15
+\--------[R:1D:8P:12]<[R:15D:7P:12]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 12 char:a
+\-------[[R:15D:7P:13]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+*** NON ZERO CHECK*** need=1 consumed=13 strlen=15
+\--------[R:1D:8P:13]<[R:15D:7P:13]<[R:18D:6P:12]<[R:27D:5P:11]<[R:9D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 13 char:a
+\----[R:14D:4P:14]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\---[[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[10 1 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\----[[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[23 14 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-----[[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[25 1 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\------[[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 1 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-------[R:1D:7P:10]<[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\------[[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[1 14 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-------[R:1D:7P:10]<[R:25D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\-----[[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[22 14 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\------[[R:22D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-------[R:14D:7P:10]<[R:22D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 10 char:b
+\-------[R:14D:7P:11]<[R:22D:6P:10]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 11 char:b
+\------[R:14D:6P:12]<[R:23D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:a!=b
+\----[[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[28 1 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-----[[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[16 1 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\------[[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[15 1 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-------[[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=0[1 0 0]
+*** NON ZERO CHECK*** need=1 consumed=10 strlen=15
+\--------[R:1D:8P:10]<[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\-------[[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 0 0]
+*** NON ZERO CHECK*** need=1 consumed=10 strlen=15
+\--------[R:14D:8P:10]<[R:15D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 10 char:b
+\-------[R:1D:7P:11]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}FAILED FINAL VALUE CHECK:b!=a
+\------[[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}] checking  SUBRULE=1[14 14 0]
+*** NON ZERO CHECK*** need=2 consumed=10 strlen=15
+\-------[R:14D:7P:10]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 10 char:b
+\-------[R:14D:7P:11]<[R:16D:6P:10]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 11 char:b
+\------[R:1D:6P:12]<[R:28D:5P:10]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 12 char:a
+\-----[R:1D:5P:13]<[R:10D:4P:10]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 13 char:a
+\----[R:1D:4P:14]<[R:42D:3P:10]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}MATCH FOUND at 14 char:a
+\---[R:31D:3P:15]<[R:11D:2P:10]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}string consumsed - finalising at depth=3 called for rule:31
+\--[R:31D:2P:15]<[R:11D:1P:5]<[R:0D:0P:0]<{TOP}string consumsed - finalising at depth=2 called for rule:31
+*** RULE:0 passed processed:15
+
+FINAL TOTAL=1
+
