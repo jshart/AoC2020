@@ -1,0 +1,22 @@
+
+
+
+
+Key:dairy
+suspected allergen;rcqb
+Key:eggs
+suspected allergen;cltx
+Key:fish
+suspected allergen;nrl
+Key:nuts
+suspected allergen;qjvvcvz
+Key:peanuts
+suspected allergen;tsqpn
+Key:sesame
+suspected allergen;xhnk
+Key:shellfish
+suspected allergen;tfqsb
+Key:wheat
+suspected allergen;zqzmzl
+
+rcqb,cltx,nrl,qjvvcvz,tsqpn,xhnk,tfqsb,zqzmzl
