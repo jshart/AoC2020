@@ -15,8 +15,12 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 InputFile input = new InputFile("input.txt");
 ArrayList<PictureTile> tiles = new ArrayList<PictureTile>();
 
+PictureTile[][] tileGrid = new PictureTile[12][12];
+
+int gsf=8;
+
 void setup() {
-  size(200, 200);
+  size(1024, 1024);
   background(0);
   stroke(255);
   frameRate(10);
@@ -58,6 +62,8 @@ void setup() {
         if (borders!=0)
         {
           println("["+temp1.title+"] has ["+borders+"] common with ["+temp2.title+"]");
+          temp1.neighbours.add(temp2);
+          temp1.neighboursIndex.add(j);
           temp1.commonBorderCount++;
         }
       }
@@ -77,6 +83,8 @@ void setup() {
   }
   println("final count="+total);
 }
+
+
 
 void parseFile()
 {
@@ -127,8 +135,20 @@ void parseFile()
 
 
 void draw() {  
+  int x,y;
+  int tileIndex=0;
+  background(255);
 
-
+  for (x=0;x<12;x++)
+  {
+    for (y=0;y<12;y++)
+    {
+      println("TileIndex="+tileIndex);
+      tiles.get(tileIndex).drawTile(x*gsf*10,y*gsf*10);
+      tileIndex++;
+    }
+  }
+  noLoop();
 }
 
 
@@ -141,6 +161,47 @@ public class PictureTile
   int[][] borders=new int[8][10];
   
   int commonBorderCount=0;
+  
+  // TODO - I think I need to associate this with the *actual* borders, so I have some concept of which
+  // border connects to which tile.
+  ArrayList<PictureTile> neighbours = new ArrayList<PictureTile>();
+  ArrayList<Integer> neighboursIndex = new ArrayList<Integer>();
+
+  public void drawTile(int xoffset, int yoffset)
+  {
+    int x=0, y=0;
+
+    for (y=0;y<10;y++)
+    {
+      for (x=0;x<10;x++)
+      {
+        if (commonBorderCount==2)
+        {
+          fill(0,0,255);
+        }
+        else if (commonBorderCount==3)
+        {
+          fill(0,0,125);
+        }
+        else
+        {
+          noFill();
+        }
+        stroke(200,200,200);
+        rect((x*gsf)+xoffset,(y*gsf)+yoffset,gsf,gsf);
+
+        if (content[x][y]==1)
+        {
+          fill(0,255,0);
+          if (x==0 || x==9 || y==0 || y==9)
+          {
+            fill(255,0,0);
+          }
+          rect((x*gsf)+xoffset,(y*gsf)+yoffset,gsf,gsf);
+        }
+      }
+    } 
+  }
   
   public PictureTile()
   {
@@ -167,6 +228,9 @@ public class PictureTile
     }
   }
   
+  // TODO - change commonBorders so it is aware of the *index*
+  // of the target tile (like we original thought) and update
+  // the match logic below to associate it with that border.
   public int commonBorders(PictureTile t)
   {
     int i=0,j=0;;
