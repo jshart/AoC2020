@@ -12,6 +12,21 @@ String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC
 //HashMap<Long, Long> memoryMap = new HashMap<Long, Long>();
 
 
+
+// TODO - suspected logic?
+// 1) record *which* borders caused a match with each tile
+// 2) starting with a corner, assume it is top lef and "walk" in the positive x axis
+//    along each adjacent tile recorded as sharing a border in turn (i.e. along
+//    an "edge".
+// 3) Align each tile on edge, such that unused common borders are projecting on x+ and y+
+// 4) repeat for each row - each subsequent row will already have some consumed links, which
+//    force the remaining links into a certain configuration
+
+// TODO - build rotation/flip logic for tiles - ultimately we have to re-orientate each
+// tile to its correct placement, so we may as well get that done and remove the complexity
+// of trying to envisage how the current border short cuts map to the actual tile positions.
+
+
 InputFile input = new InputFile("input.txt");
 ArrayList<PictureTile> tiles = new ArrayList<PictureTile>();
 
@@ -33,12 +48,12 @@ void setup() {
   int i=0,j=0;
   PictureTile temp1, temp2;
 
-  println("Tile count:"+tiles.size()+" picture size? "+Math.sqrt((double)i));
-  for (i=0;i<tiles.size();i++)
-  {
-    temp1=tiles.get(i);
-    temp1.printTile();
-  }
+  //println("Tile count:"+tiles.size()+" picture size? "+Math.sqrt((double)i));
+  //for (i=0;i<tiles.size();i++)
+  //{
+  //  temp1=tiles.get(i);
+  //  temp1.printTile();
+  //}
   
   int borders=0;
   // check every tile in the list...
@@ -61,7 +76,7 @@ void setup() {
         
         if (borders!=0)
         {
-          println("["+temp1.title+"] has ["+borders+"] common with ["+temp2.title+"]");
+          //println("["+temp1.title+"] has ["+borders+"] common with ["+temp2.title+"]");
           temp1.neighbours.add(temp2);
           temp1.neighboursIndex.add(j);
           temp1.commonBorderCount++;
@@ -74,7 +89,7 @@ void setup() {
   for (i=0;i<tiles.size();i++)
   {
     temp1=tiles.get(i);
-    println(temp1.title+" has "+temp1.commonBorderCount);
+    //println(temp1.title+" has "+temp1.commonBorderCount);
     
     if (temp1.commonBorderCount==2)
     {
@@ -103,7 +118,7 @@ void parseFile()
       
       // grab the tile number
       temp.tileNumber=Integer.parseInt(s.substring(5,s.length()-1));
-      println("Tile number calculated to ="+temp.tileNumber);
+      //println("Tile number calculated to ="+temp.tileNumber);
 
       temp.title=s;
       
@@ -143,7 +158,6 @@ void draw() {
   {
     for (y=0;y<12;y++)
     {
-      println("TileIndex="+tileIndex);
       tiles.get(tileIndex).drawTile(x*gsf*10,y*gsf*10);
       tileIndex++;
     }
@@ -207,6 +221,27 @@ public class PictureTile
   {
   }
   
+  public void printBorders()
+  {
+    int i=0;
+    int j=0;
+    int k=0;
+    
+    println("*** BORDER DUMP START");
+    for (j=0;j<8;j++)
+    {
+      print("BORDER:");
+      for (i=0;i<10;i++)
+      {
+        print(borders[j][i]);
+      }
+      k++;
+      println();
+    }
+    println("*** BORDER DUMP END; rows printed="+k);
+  }
+ 
+  
   public void buildBorders()
   {
     int i=0;
@@ -226,6 +261,7 @@ public class PictureTile
       borders[6][i]=borders[2][9-i]; // top border (inverted)
       borders[7][i]=borders[3][9-i]; // bottom border (inverted)
     }
+    printBorders();
   }
   
   // TODO - change commonBorders so it is aware of the *index*
