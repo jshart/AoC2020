@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day22_part2\\data\\example");
+String filebase = new String("C:\\Users\\jsh27\\OneDrive\\Documents\\GitHub\\AoC2020\\AoC2020_day22_part2\\data\\mydata");
 
 //ArrayList<String> fieldLines = new ArrayList<String>();
 //int numFieldLines=0;
@@ -47,18 +47,7 @@ void setup() {
 
   
   int result=play(0,player1Ints,player2Ints);
-  printDeck("P1",player1Ints,0);
-  printDeck("P2",player1Ints,0);
 
-  if (player1Ints.size()>0)
-  {
-    result=calculateScores(player1Ints);
-  }
-  else
-  {
-    result=calculateScores(player2Ints);
-  }
-  println("FINAL SCORE:"+result);
 }
 
 ArrayList<Integer> copyHand(ArrayList<Integer> p)
@@ -167,15 +156,22 @@ int play(int d, ArrayList<Integer> p1, ArrayList<Integer> p2)
   // who won?
   if (player1Ints.size()>0)
   {
+    printDeck("P1",player1Ints,d);
+    printTree(d);
+    println("GAME RESULT:"+calculateScores(player1Ints));
     result=1;
   }
   else
   {
+    printDeck("P2",player2Ints,d);
+    printTree(d);
+    println("GAME RESULT:"+calculateScores(player2Ints));
     result=2;
   }
   
   return(result);
 }
+
 
 int calculateScores(ArrayList<Integer> p)
 {
@@ -248,6 +244,10 @@ public class SaveState
     int i=0,l=0;
     
     l=player1Ints.size();
+    if (l!=p1.length)
+    {
+      return(false);
+    }
     for (i=0;i<l;i++)
     {
       if (p1[i]!=player1Ints.get(i))
@@ -257,6 +257,10 @@ public class SaveState
     }
     
     l=player2Ints.size();
+    if (l!=p2.length)
+    {
+      return(false);
+    }
     for (i=0;i<l;i++)
     {
       if (p2[i]!=player2Ints.get(i))
