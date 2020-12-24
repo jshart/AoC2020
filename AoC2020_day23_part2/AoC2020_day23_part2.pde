@@ -42,12 +42,12 @@ void setup() {
   int numbers=1000000;
   //int numbers=100;
 
-  //for (turn=10;turn<numbers;turn++)
-  //{
-  //  //println(turn);
-  //  cups.add(turn);
-  //}
-  //println("Numbers generated");
+  for (turn=10;turn<numbers;turn++)
+  {
+    //println(turn);
+    cups.add(turn);
+  }
+  println("Numbers generated");
   
   int currentCupContents;
   int currentCupIndex=0;
@@ -57,28 +57,28 @@ void setup() {
   int highestRemoved=0;
   
   // for each turn
-  //for (turn=0;turn<10000000;turn++)
-  for (turn=0;turn<100;turn++)
+  for (turn=0;turn<10000000;turn++)
+  //for (turn=0;turn<100;turn++)
   {
-    //if ((turn+1)%1000==0)
-    //{
-      println("*** Move:"+(turn+1));
-    //}
-    
-    print("CL=");
-    for (k=0;k<cups.size();k++)
+    if ((turn+1)%1000==0)
     {
-      if (k==currentCupIndex)
-      {
-        print("(");
-      }
-      print(cups.get(k)+",");
-      if (k==currentCupIndex)
-      {
-        print(")");
-      }
+      println("*** Move:"+(turn+1));
     }
-    println();
+    
+    //print("CL=");
+    //for (k=0;k<cups.size();k++)
+    //{
+    //  if (k==currentCupIndex)
+    //  {
+    //    print("(");
+    //  }
+    //  print(cups.get(k)+",");
+    //  if (k==currentCupIndex)
+    //  {
+    //    print(")");
+    //  }
+    //}
+    //println();
     
     // grab the current cup
     currentCupContents=cups.get(currentCupIndex);
@@ -102,26 +102,26 @@ void setup() {
       
 
     
-    print("PU:");
-    for (k=0;k<3;k++)
-    {
-      print(next3[k]+",");
-    }
-    println();
-    print("RL=");
-    for (k=0;k<cups.size();k++)
-    {
-      if (k==currentCupIndex)
-      {
-        print("(");
-      }
-      print(cups.get(k)+",");
-      if (k==currentCupIndex)
-      {
-        print(")");
-      }
-    }
-    println(); 
+    //print("PU:");
+    //for (k=0;k<3;k++)
+    //{
+    //  print(next3[k]+",");
+    //}
+    //println();
+    //print("RL=");
+    //for (k=0;k<cups.size();k++)
+    //{
+    //  if (k==currentCupIndex)
+    //  {
+    //    print("(");
+    //  }
+    //  print(cups.get(k)+",");
+    //  if (k==currentCupIndex)
+    //  {
+    //    print(")");
+    //  }
+    //}
+    //println(); 
     
     
 
@@ -183,7 +183,7 @@ void setup() {
         }
       }
     }
-    println(" actual dest contents "+targetDestinationContents+" at *index*:"+destIndex);
+    //println(" actual dest contents "+targetDestinationContents+" at *index*:"+destIndex);
 
     // want to add *after this index*
     destIndex++;
@@ -212,20 +212,20 @@ void setup() {
       //}
     }
      
-    print("NL=");
-    for (k=0;k<cups.size();k++)
-    {
-      if (k==currentCupIndex)
-      {
-        print("(");
-      }
-      print(cups.get(k)+",");
-      if (k==currentCupIndex)
-      {
-        print(")");
-      }
-    }
-    println();
+    //print("NL=");
+    //for (k=0;k<cups.size();k++)
+    //{
+    //  if (k==currentCupIndex)
+    //  {
+    //    print("(");
+    //  }
+    //  print(cups.get(k)+",");
+    //  if (k==currentCupIndex)
+    //  {
+    //    print(")");
+    //  }
+    //}
+    //println();
 
     
     // update current cup
@@ -235,7 +235,12 @@ void setup() {
       currentCupIndex=0;
     }
     
-    println();
+    //println();
+  }
+  
+  for (k=0;k<cups.size();k++)
+  {
+    print(cups.get(k)+",");
   }
   
   print("FINAL ANSWER: ");
@@ -243,35 +248,30 @@ void setup() {
   //// RHS
   k=cups.indexOf(1);
   
-  //println("index of 1 is "+k+" containing ["+cups.get(k)+"]");
-  //k++;
-  //if (k==numbers)
-  //{
-  //  k=0;
-  //}
-  //println("index of element after 1 is "+k+" containing ["+cups.get(k)+"]");
-  //k++;
-  //if (k==numbers)
-  //{
-  //  k=0;
-  //}
-  //println("index of element after 1 is "+k+" containing ["+cups.get(k)+"]");
+  println("index of 1 is "+k+" containing ["+cups.get(k)+"]");
+  k++;
+  if (k==numbers)
+  {
+    k=0;
+  }
+  println("index of element after 1 is "+k+" containing ["+cups.get(k)+"]");
+  k++;
+  if (k==numbers)
+  {
+    k=0;
+  }
+  println("index of element 2 after 1 is "+k+" containing ["+cups.get(k)+"]");
   
-  //for (k=0;k<cups.size();k++)
+  //for (;k<cups.size();k++)
   //{
   //  print(cups.get(k)+",");
   //}
   
-  for (;k<cups.size();k++)
-  {
-    print(cups.get(k)+",");
-  }
-  
-  //LHS
-  for (k=0;k<cups.indexOf(1);k++)
-  {
-    print(cups.get(k)+",");
-  }
+  ////LHS
+  //for (k=0;k<cups.indexOf(1);k++)
+  //{
+  //  print(cups.get(k)+",");
+  //}
   println();
 }
 
