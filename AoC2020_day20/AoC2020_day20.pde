@@ -89,7 +89,7 @@ void setup() {
       }
     }
   }
-  
+
   
   
   
@@ -105,6 +105,11 @@ void setup() {
     }
   }
   println("final count="+total);
+
+  tiles.get(0).printTile();
+  tiles.get(0).flipTileVert();
+  println();
+  tiles.get(0).printTile();
 }
 
 
@@ -190,6 +195,22 @@ public class PictureTile
   // border connects to which tile.
   ArrayList<PictureTile> neighbours = new ArrayList<PictureTile>();
   ArrayList<Integer> neighboursIndex = new ArrayList<Integer>();
+  
+  public void flipTileVert()
+  {
+    int[][] temp=new int[10][];
+    int i=0;
+    
+    for (i=0;i<10;i++)
+    {
+      temp[9-i]=content[i];
+    }
+    for (i=0;i<10;i++)
+    {
+      content[i]=temp[i];
+    }
+    buildBorders();
+  }
 
   public void drawTile(int xoffset, int yoffset)
   {
