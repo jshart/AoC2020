@@ -55,6 +55,11 @@ void setup() {
   //  temp1.printTile();
   //}
   
+  
+  //TODO - iterate on this code flipping tiles until we dont get any matches for inverted...
+  // - flip for any tile where inverse matches are greater than regular matches?
+  // - flip only for tiles where the regular match is zero? and repeat?
+  
   int borders=0;
   // check every tile in the list...
   for (i=0;i<tiles.size();i++)
@@ -85,11 +90,14 @@ void setup() {
     }
   }
   
+  
+  
+  
   long total=1;
   for (i=0;i<tiles.size();i++)
   {
     temp1=tiles.get(i);
-    //println(temp1.title+" has "+temp1.commonBorderCount);
+    println(temp1.title+" common: "+temp1.commonBorderCount+" regular:"+temp1.regularBorderCount+" inverse:"+temp1.invertedBorderCount);
     
     if (temp1.commonBorderCount==2)
     {
@@ -175,6 +183,8 @@ public class PictureTile
   int[][] borders=new int[8][10];
   
   int commonBorderCount=0;
+  int regularBorderCount=0;
+  int invertedBorderCount=0;
   
   // TODO - I think I need to associate this with the *actual* borders, so I have some concept of which
   // border connects to which tile.
@@ -261,7 +271,7 @@ public class PictureTile
       borders[6][i]=borders[2][9-i]; // top border (inverted)
       borders[7][i]=borders[3][9-i]; // bottom border (inverted)
     }
-    printBorders();
+    //printBorders();
   }
   
   // TODO - change commonBorders so it is aware of the *index*
@@ -271,17 +281,33 @@ public class PictureTile
   {
     int i=0,j=0;;
     int count=0;
+    int temp=0;
     
-    // check every border in this tile...
-    for (i=0;i<8;i++)
+    // check every *regular* border in this tile...
+    for (i=0;i<4;i++)
     {
-      // ... against every border in the target tile
-      for (j=0;j<8;j++)
+      // ... against every *regular* border in the target tile
+      for (j=0;j<4;j++)
       {
         // count how many match
-        count+=borderMatch(this.borders[i], t.borders[j]);
+        temp=borderMatch(this.borders[i], t.borders[j]);
+        regularBorderCount+=temp;
+        count+=temp;
       }
     }
+    // check every *inverted* border in this tile...
+    for (;i<8;i++)
+    {
+      // ... against every *regular* border in the target tile
+      for (j=0;j<4;j++)
+      {
+        // count how many match
+        temp=borderMatch(this.borders[i], t.borders[j]);
+        invertedBorderCount+=temp;
+        count+=temp;
+      }
+    }
+    
     return(count);
   }
   
