@@ -170,7 +170,7 @@ void printMasterList()
   int i=0;
   for (i=0;i<masterList.size();i++)
   {
-    println("Allergen ML:"+masterList.get(i));
+    println("ML:"+masterList.get(i));
   }
 }
 
