@@ -151,7 +151,7 @@ void draw() {
 
   String s;
   
-  int dl=5;
+  int dl=4;
       
   for (x=0;x<12;x++)
   {
@@ -203,7 +203,7 @@ void draw() {
         destTile=tiles.get(currentTile.borderList.getBorderByIndex(i));
         s+=","+Integer.toString(currentTile.borderList.getBorderByIndex(i));
         
-        if (currentTile.borderList.commonBordersFound()<dl)
+        if (currentTile.borderList.commonBordersFound()<3)
         {
           line(currentTile.gx,currentTile.gy,destTile.gx,destTile.gy);
         }
@@ -475,6 +475,7 @@ print("xform:");
       if (checkBorders(t)==true)
       {
         result=true;
+        return(result);
       }
       
       // no match yet - so rotate and repeat
@@ -501,6 +502,8 @@ print("xform:");
       t.borderList.addBorderIfNew(this.alNumber);
       // we are to the left of t
       result=true;
+      return(result);
+
     }
     // Right v Left
     if (borderMatch(borders[1],t.borders[0])==true)
@@ -509,6 +512,8 @@ print("xform:");
       t.borderList.addBorderIfNew(this.alNumber);
       // we are to the right of t
       result=true;
+      return(result);
+
     }
     // top v Bottom
     if (borderMatch(borders[2],t.borders[3])==true)
@@ -517,6 +522,8 @@ print("xform:");
       t.borderList.addBorderIfNew(this.alNumber);
       // we are below t
       result=true;
+      return(result);
+
     }
     // Bottom v Top
     if (borderMatch(borders[3],t.borders[2])==true)
@@ -525,6 +532,8 @@ print("xform:");
       t.borderList.addBorderIfNew(this.alNumber);
       // we are above t
       result=true;
+      return(result);
+
     }
     
     return(result);
