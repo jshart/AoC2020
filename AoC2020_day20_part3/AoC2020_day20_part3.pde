@@ -10,10 +10,10 @@ ArrayList<PictureTile> tiles = new ArrayList<PictureTile>();
 
 PictureTile[][] tileGrid = new PictureTile[12][12];
 
-int gsf=8;
+int gsf=11;
 
 void setup() {
-  size(1024, 1024);
+  size(1400, 1400);
   background(0);
   stroke(255);
   frameRate(10);
@@ -71,25 +71,23 @@ void setup() {
         {
           temp1.justCheckBorders(temp2);
         }
-                
-        temp1.updateBorderCount();
-        temp2.updateBorderCount();
       }
     }
   }
-  
-  //int[] borderCounts=new int[5];
-  //for (i=0;i<tiles.size();i++)
-  //{
-  //  temp1=tiles.get(i);
+  println();
+  long total=1;
+  for (i=0;i<tiles.size();i++)
+  {
+    temp1=tiles.get(i);
     
-  //  println(temp1.title+" common: "+temp1.commonBorderCount);
-  //  borderCounts[temp1.commonBorderCount]++;
-  //}  
-  //for (i=0;i<5;i++)
-  //{
-  //  println("Border summary for ["+i+"]="+borderCounts[i]);
-  //}
+    if (temp1.borderList.commonBordersFound()==2)
+    {
+      println("tile ID:"+temp1.title);
+      
+      total*=temp1.tileNumberFromFile;
+    }
+  }  
+  print("Final:"+total);
 }
 
 
@@ -152,6 +150,8 @@ void draw() {
   PictureTile destTile=null;
 
   String s;
+  
+  int dl=5;
       
   for (x=0;x<12;x++)
   {
@@ -170,11 +170,12 @@ void draw() {
       fill(200,200,200);
 
       circle(gx+((gsf*10)/2),gy+((gsf*10)/2),40); 
+      rect(gx,gy,gsf*10,gsf*10);
       fill(255,0,0);
 
       text(s,gx+((gsf*10)/2),gy+((gsf*10)/2));
 
-      if (currentTile.commonBorderCount<5)
+      if (currentTile.borderList.commonBordersFound()<dl)
       //if (tileIndex==12)
       {
         currentTile.drawTile(gx,gy);
@@ -197,22 +198,19 @@ void draw() {
       s=new String();
 
 
-      for (i=0;i<currentTile.borderList.size();i++)
+      for (i=0;i<currentTile.borderList.commonBordersFound();i++)
       {
-        //if (currentTile.borderMatchIndex[i]>=0)
+        destTile=tiles.get(currentTile.borderList.getBorderByIndex(i));
+        s+=","+Integer.toString(currentTile.borderList.getBorderByIndex(i));
+        
+        if (currentTile.borderList.commonBordersFound()<dl)
         {
-          destTile=tiles.get(currentTile.borderList.get(i));
-          s+=","+Integer.toString(currentTile.borderList.get(i));
-          
-          if (currentTile.commonBorderCount<5)
-          {
-            line(currentTile.gx,currentTile.gy,destTile.gx,destTile.gy);
-          }
+          line(currentTile.gx,currentTile.gy,destTile.gx,destTile.gy);
         }
       }
       
       //text(s,currentTile.gx+(gsf*10), currentTile.gy+(gsf*11));
-      if (currentTile.commonBorderCount<5)
+      if (currentTile.borderList.commonBordersFound()<dl)
       {
         fill(255,0,0);
         text(s,currentTile.gx, currentTile.gy+(gsf*11));
@@ -224,6 +222,38 @@ void draw() {
   noLoop();
 }
 
+public class BorderListContainer
+{
+  private ArrayList<Integer> bl = new ArrayList<Integer>();
+
+  public BorderListContainer()
+  {
+  }
+  
+  public void addBorderIfNew(int newBorder)
+  {
+    int j=0;
+    for (j=0;j<bl.size();j++)
+    {
+      if (bl.get(j)==newBorder)
+      {
+        println("throwing away duplicate:"+newBorder);
+        return;
+      }
+    }
+    bl.add(newBorder);
+  }
+  
+  public int commonBordersFound()
+  {
+    return(bl.size());
+  }
+  
+  public int getBorderByIndex(int i)
+  {
+    return(bl.get(i));
+  }
+}
 
 public class PictureTile
 {
@@ -234,36 +264,13 @@ public class PictureTile
   
   int[][] borders=new int[4][10];
   //int[] borderMatchIndex = new int[4];
-  ArrayList<Integer> borderList = new ArrayList<Integer>();
-  int commonBorderCount=0;
-
-  // TODO - I need to clean up borderList so that I dont add duplicate entries.
+  BorderListContainer borderList = new BorderListContainer();
   
   int gx=0;
   int gy=0;
   
   boolean locked=false;
 
-  public int updateBorderCount()
-  {
-    commonBorderCount=borderList.size();
-    return(commonBorderCount);
-  }
-  //public int updateBorderCount()
-  //{
-  //  int i=0;
-  //  print("existing BC:"+commonBorderCount);
-  //  commonBorderCount=0;
-  //  for (i=0;i<4;i++)
-  //  {
-  //    if (borderMatchIndex[i]>=0)
-  //    {
-  //      commonBorderCount++;
-  //    }
-  //  }
-  //  println("new BC:"+commonBorderCount);
-  //  return(commonBorderCount);
-  //}
   
   public void updateGfx(int x, int y)
   {
@@ -335,11 +342,11 @@ public class PictureTile
     {
       for (x=0;x<10;x++)
       {
-        if (commonBorderCount==2)
+        if (borderList.commonBordersFound()==2)
         {
           fill(0,0,255);
         }
-        else if (commonBorderCount==3)
+        else if (borderList.commonBordersFound()==3)
         {
           fill(0,0,125);
         }
@@ -365,11 +372,7 @@ public class PictureTile
   
   public PictureTile()
   {
-    //int i=0;
-    //for (i=0;i<4;i++)
-    //{
-    //  borderMatchIndex[i]=-1;
-    //}
+
   }
   
   public void printBorders()
@@ -494,32 +497,32 @@ print("xform:");
     // Left v Right      
     if (borderMatch(borders[0],t.borders[1])==true)
     {
-      borderList.add(t.alNumber);
-      t.borderList.add(this.alNumber);
+      borderList.addBorderIfNew(t.alNumber);
+      t.borderList.addBorderIfNew(this.alNumber);
       // we are to the left of t
       result=true;
     }
     // Right v Left
     if (borderMatch(borders[1],t.borders[0])==true)
     {
-      borderList.add(t.alNumber);
-      t.borderList.add(this.alNumber);
+      borderList.addBorderIfNew(t.alNumber);
+      t.borderList.addBorderIfNew(this.alNumber);
       // we are to the right of t
       result=true;
     }
     // top v Bottom
     if (borderMatch(borders[2],t.borders[3])==true)
     {
-      borderList.add(t.alNumber);
-      t.borderList.add(this.alNumber);
+      borderList.addBorderIfNew(t.alNumber);
+      t.borderList.addBorderIfNew(this.alNumber);
       // we are below t
       result=true;
     }
     // Bottom v Top
     if (borderMatch(borders[3],t.borders[2])==true)
     {
-      borderList.add(t.alNumber);
-      t.borderList.add(this.alNumber);
+      borderList.addBorderIfNew(t.alNumber);
+      t.borderList.addBorderIfNew(this.alNumber);
       // we are above t
       result=true;
     }
