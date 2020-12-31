@@ -12,8 +12,18 @@ PictureTile[][] tileGrid = new PictureTile[12][12];
 
 int gsf=11;
 
+FinalPicture fp = new FinalPicture();
+
+// TODO;
+// 4) Create a function to grid search for "monster" pattern matches - record number of matches
+// 5) calculate final answer = total populated cells - (no monsters * no of '1's in a monster)
+// 6) win gold star!
+
+// total populated cells=15Total waves;2254
+
+
 void setup() {
-  size(1400, 1400);
+  size(2500, 1400);
   background(0);
   stroke(255);
   frameRate(10);
@@ -25,23 +35,6 @@ void setup() {
   
   int i=0,j=0;
   PictureTile temp1, temp2;
-
-  //println("Tile count:"+tiles.size()+" picture size? "+Math.sqrt((double)i));
-  //for (i=0;i<tiles.size();i++)
-  //{
-  //  temp1=tiles.get(i);
-  //  temp1.printTile();
-  //}
-  
-  
-  //tiles.get(0).locked=true;
-
-  //temp1=tiles.get(0);
-  //temp1.printTile();
-  //temp1.flipTileVert();
-  //temp1.printTile();
-  //temp1.flipTileVert();
-  //temp1.printTile();
 
   // check every tile in the list...
   for (i=0;i<tiles.size();i++)
@@ -79,13 +72,9 @@ void setup() {
   }  
   print("Final:"+total);
   
-  // Start by seeding the new matrix with tile number 12 - as this is a known "good corner")
-//  ArrayList<PictureTile> completedTiles=new ArrayList<PictureTile>();
-//  ArrayList<PictureTile> workingTilesList=new ArrayList<PictureTile>();
+  
   
   tileGrid[0][0]=tiles.get(12);
-  
-  // TODO: Need to think about how to structure this to make it repeatable...
   
   int direction=0;
   int x=0,y=0;
@@ -148,57 +137,49 @@ println("reassembling:"+x+","+y);
         println();
       }
     }
-
-    
-    //// Check all 
-    //for (i=0;i<temp1.borderList.commonBordersFound();i++)
-    //{
-    //  // grab one of the neighbour tiles
-    //  temp2=tiles.get(temp1.borderList.getBorderByIndex(i));
-      
-    //  // check to see if this tile exists in the completed set - if it is, we can skip it
-    //  if (tileInList(completedTiles,temp2)==true)
-    //  {
-    //    println("Ignoring:"+temp1.borderList.getBorderByIndex(i)+" as already completed");
-    //  }
-    //  else
-    //  {
-    //    println("Need to process:"+temp1.borderList.getBorderByIndex(i));
-    //    direction=temp2.transformToAlignWith(temp1);
-        
-    //    //borders[0][i]=content[0][i]; // left border
-    //    //borders[1][i]=content[9][i]; // right border
-    //    //borders[2][i]=content[i][0]; // top border
-    //    //borders[3][i]=content[i][9]; // bottom border  
-    //    if (direction==1) // right
-    //    {
-    //      tileGrid[currentx+1][currenty]=temp2;
-    //    }
-    //    else if (direction==3) //bottom
-    //    {
-    //      tileGrid[currentx][currenty+1]=temp2;
-    //    }
-    //    else if (direction==2) // top
-    //    {
-    //      tileGrid[currentx][currenty-1]=temp2;
-    //    }
-    //    else if (direction==0) // left
-    //    {
-    //      tileGrid[currentx-1][currenty]=temp2;
-    //    }
-    //    completedTiles.add(temp2);
-    //  }
-    //}
   }
   
-  //int x=0,y=0;
-  //for (x=0;x<12;x++)
-  //{
-  //  for (y=0;y<12;y++)
-  //  {
-  //    tileGrid[x][y]=tiles.get(12);
-  //  }
-  //}
+  SeaMonster m = new SeaMonster();
+  m.printMonster();
+  fp.mapContentToFinalPicture();
+
+  int monsters=0;
+  
+  println();
+  for (i=0;i<4;i++)
+  {
+    for (x=0;x<96;x++)
+    {
+      for (y=0;y<96;y++)
+      {
+        if (m.isMonster(fp,x,y)==true)
+        {
+          monsters++;
+        }
+      }
+    }
+    fp.rotateLeft90();
+  }
+  fp.flipTileHorz();
+  for (i=0;i<4;i++)
+  {
+    for (x=0;x<96;x++)
+    {
+      for (y=0;y<96;y++)
+      {
+        if (m.isMonster(fp,x,y)==true)
+        {
+          monsters++;
+        }
+      }
+    }
+    fp.rotateLeft90();
+  }
+  fp.flipTileHorz();
+
+  println("Total monsters="+monsters);
+  
+  
 }
 
 
@@ -257,15 +238,20 @@ void draw()
   drawTiles();
   //fixGraphicsLocations();
   //drawTiles();
+  
+  fp.drawFinalMap();
   noLoop();
 }
+
+
+
+
 
 void gridLayout() {
   int x,y,i;
   background(255);
   int gx=0,gy=0;
   PictureTile currentTile=null;
-  PictureTile destTile=null;
 
   for (x=0;x<12;x++)
   {
@@ -589,20 +575,6 @@ public class PictureTile
     //printBorders();
   }
 
-  //public boolean justCheckBorders(PictureTile t)
-  //{
-  //  int i=0;
-
-  //  for (i=0;i<4;i++)
-  //  {
-  //    if (checkBorders(t)==true)
-  //    {
-  //      return(true);
-  //    }
-  //  }    
-  //  return(false);
-  //}  
-
   // transform the tile and test to see if any borders match
   public int transformToAlignWith(PictureTile t)
   {
@@ -801,6 +773,174 @@ public class InputFile
     for (i=0;i<numLines;i++)
     {
       println("L"+i+": "+lines.get(i));
+    }
+  }
+}
+
+// TODO: Need to flip Horz, Vert, and rotate 90 (and then flip horz & vert again)
+public class SeaMonster
+{
+  // Sea monsters have 15 populated pixels
+  int populated=15;
+  
+  String[] monsterAscii ={"                  # ",
+                          "#    ##    ##    ###",
+                          " #  #  #  #  #  #   "};
+  
+    //String[] monsterAscii ={" #  #  #  #  #  #   ",
+    //                        "#    ##    ##    ###",
+    //                        "                  # "};
+  int[][] hContent = new int[20][3];
+  int total=0;
+  
+  public SeaMonster()
+  {
+    int i=0,j=0;
+
+    for (i=0;i<20;i++)
+    {
+      for (j=0;j<3;j++)
+      {
+        if (monsterAscii[j].charAt(i)=='#')
+        {
+          hContent[i][j]=1;
+          total+=1;
+        }
+        else
+        {
+          hContent[i][j]=0;
+        }
+      }
+    }
+  }
+  
+  public void printMonster()
+  {
+    int i=0,j=0;
+ 
+    for (i=0;i<3;i++)
+    {
+      println(monsterAscii[i]);
+    }
+  
+    for (j=0;j<3;j++)
+    {
+      for (i=0;i<20;i++)
+      {
+        print(hContent[i][j]);
+      }
+      println();
+    }
+    print("total populated cells="+total);
+  }
+  
+  public boolean isMonster(FinalPicture fp, int offsetx, int offsety)
+  {
+    int i=0,j=0;
+    
+    //println("Checking for monster at:"+offsetx+","+offsety);
+    for (i=0;i<20;i++)
+    {
+      for (j=0;j<3;j++)
+      {
+        if (offsetx+i>=96 || offsety+j>=96)
+        {
+          return(false);
+        }
+        if (hContent[i][j]>0 && fp.finalPicture[offsetx+i][offsety+j]==0)
+        {
+          return(false);
+        }
+      }
+    }
+    println("Monster found");
+    return(true);
+  }
+}
+
+public class FinalPicture
+{
+  int[][] finalPicture = new int[96][96];
+  
+  void mapContentToFinalPicture()
+  {
+    int x,y,xc,yc;
+    int dx,dy;
+    PictureTile currentTile=null;
+  
+    for (x=0;x<12;x++)
+    {
+      for (y=0;y<12;y++)
+      {
+        currentTile=tileGrid[x][y];
+        for (xc=1;xc<9;xc++)
+        {
+          for (yc=1;yc<9;yc++)
+          {
+            dx=(x*8)+(xc-1);
+            dy=(y*8)+(yc-1);
+            finalPicture[dx][dy]=tileGrid[x][y].content[xc][yc];
+          }
+        }
+      }
+    }
+  }
+  
+  void drawFinalMap()
+  {
+    int x,y;
+    int xoffset=1400;
+    int waves=0;
+    for (x=0;x<96;x++)
+    {
+      for (y=0;y<96;y++)
+      {
+        if (finalPicture[x][y]>0)
+        {
+          fill(0,0,200);
+          stroke(0,0,255);
+          rect(xoffset+(x*gsf),y*gsf,gsf,gsf);
+          waves+=1;
+        }
+      }
+    }
+    println("Total waves;"+waves);
+  }
+
+  public void flipTileHorz()
+  {
+    int[][] temp=new int[96][];
+    int i=0;
+    
+    println("Flipping Picture vert");
+    
+    for (i=0;i<96;i++)
+    {
+      temp[95-i]=finalPicture[i];
+    }
+    for (i=0;i<96;i++)
+    {
+      finalPicture[i]=temp[i];
+    }
+  }
+
+  public void rotateLeft90()
+  {
+    int[][] temp=new int[96][96];
+    int i=0,j=0;
+    
+    println("Rotating Picture 90");
+    
+    for (i=0;i<96;i++)
+    {
+      for (j=0;j<96;j++)
+      {
+        temp[j][95-i]=finalPicture[i][j];
+      }
+    }
+    for (i=0;i<96;i++)
+    {
+      finalPicture[i]=temp[i];
     }
   }
 }
