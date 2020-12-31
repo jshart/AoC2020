@@ -34,8 +34,6 @@ void setup() {
   //}
   
   
-  boolean bordersFound=false;
-
   //tiles.get(0).locked=true;
 
   //temp1=tiles.get(0);
@@ -61,15 +59,7 @@ void setup() {
   
         if (temp2.locked==false)
         {
-          bordersFound=temp1.transformToAlignWith(temp2);
-          if (bordersFound==true)
-          {
-            //temp1.locked=true;
-          }
-        }
-        else
-        {
-          temp1.justCheckBorders(temp2);
+          temp1.transformToAlignWith(temp2);
         }
       }
     }
@@ -88,6 +78,127 @@ void setup() {
     }
   }  
   print("Final:"+total);
+  
+  // Start by seeding the new matrix with tile number 12 - as this is a known "good corner")
+//  ArrayList<PictureTile> completedTiles=new ArrayList<PictureTile>();
+//  ArrayList<PictureTile> workingTilesList=new ArrayList<PictureTile>();
+  
+  tileGrid[0][0]=tiles.get(12);
+  
+  // TODO: Need to think about how to structure this to make it repeatable...
+  
+  int direction=0;
+  int x=0,y=0;
+
+  // Process each *row*
+  for (y=0;y<12;y++)
+  {
+    x=0;
+
+    // Grab the starting tile for this row - it should already be added by this point
+    temp1=tileGrid[x][y];
+
+println("reassembling:"+x+","+y);
+
+    if (y<11)
+    {
+      // Check the borders, looking for the one that aligns with the bottom (i.e. below)
+      // and add this to the *next* row
+      for (i=0;i<temp1.borderList.commonBordersFound();i++)
+      {
+        // grab one of the neighbour tiles
+        temp2=tiles.get(temp1.borderList.getBorderByIndex(i));
+        
+        direction=temp2.transformToAlignWith(temp1);
+        if (direction==3) //bottom
+        {
+          tileGrid[x][y+1]=temp2;
+        }
+      }
+    }
+
+    boolean found=false;
+    // Now walk along the row...
+    for (x=0;x<11;x++)
+    {
+      found=false;
+      // looking for the *next* element on this row
+      for (i=0;i<temp1.borderList.commonBordersFound();i++)
+      {
+        // grab one of the neighbour tiles
+        temp2=tiles.get(temp1.borderList.getBorderByIndex(i));
+        
+        // Found an element, align to the current node
+        direction=temp2.transformToAlignWith(temp1);
+        
+        // if this matches in the right direction...
+        if (direction==1) //Right
+        {
+          // add it to the next element, which gets us ready to check the next element
+          tileGrid[x+1][y]=temp2;
+          temp1=temp2;
+          found=true;
+          break;
+        }
+      }
+      if (found==false)
+      {
+        println(temp1.alNumber+" failed to find a valid neighbour to the right:"+x+","+y+" ");
+        temp1.borderList.printBorders();
+        println();
+      }
+    }
+
+    
+    //// Check all 
+    //for (i=0;i<temp1.borderList.commonBordersFound();i++)
+    //{
+    //  // grab one of the neighbour tiles
+    //  temp2=tiles.get(temp1.borderList.getBorderByIndex(i));
+      
+    //  // check to see if this tile exists in the completed set - if it is, we can skip it
+    //  if (tileInList(completedTiles,temp2)==true)
+    //  {
+    //    println("Ignoring:"+temp1.borderList.getBorderByIndex(i)+" as already completed");
+    //  }
+    //  else
+    //  {
+    //    println("Need to process:"+temp1.borderList.getBorderByIndex(i));
+    //    direction=temp2.transformToAlignWith(temp1);
+        
+    //    //borders[0][i]=content[0][i]; // left border
+    //    //borders[1][i]=content[9][i]; // right border
+    //    //borders[2][i]=content[i][0]; // top border
+    //    //borders[3][i]=content[i][9]; // bottom border  
+    //    if (direction==1) // right
+    //    {
+    //      tileGrid[currentx+1][currenty]=temp2;
+    //    }
+    //    else if (direction==3) //bottom
+    //    {
+    //      tileGrid[currentx][currenty+1]=temp2;
+    //    }
+    //    else if (direction==2) // top
+    //    {
+    //      tileGrid[currentx][currenty-1]=temp2;
+    //    }
+    //    else if (direction==0) // left
+    //    {
+    //      tileGrid[currentx-1][currenty]=temp2;
+    //    }
+    //    completedTiles.add(temp2);
+    //  }
+    //}
+  }
+  
+  //int x=0,y=0;
+  //for (x=0;x<12;x++)
+  //{
+  //  for (y=0;y<12;y++)
+  //  {
+  //    tileGrid[x][y]=tiles.get(12);
+  //  }
+  //}
 }
 
 
@@ -140,8 +251,63 @@ void parseFile()
   }
 }
 
+void draw()
+{
+  gridLayout();
+  drawTiles();
+  //fixGraphicsLocations();
+  //drawTiles();
+  noLoop();
+}
 
-void draw() {  
+void gridLayout() {
+  int x,y,i;
+  background(255);
+  int gx=0,gy=0;
+  PictureTile currentTile=null;
+  PictureTile destTile=null;
+
+  for (x=0;x<12;x++)
+  {
+    for (y=0;y<12;y++)
+    {
+      gx=(x)*gsf*10;
+      gy=(y)*gsf*10;
+      currentTile=tileGrid[x][y];
+      if (currentTile!=null)
+      {
+        currentTile.updateGfx(gx,gy);
+      }
+    }
+  }
+}
+
+void listLayout() {
+  int x,y,i;
+  int tileIndex=0;
+  background(255);
+  int gx=0,gy=0;
+  PictureTile currentTile=null;
+  PictureTile destTile=null;
+
+  // Compute GFX co-ordinates.    
+  for (x=0;x<12;x++)
+  {
+    for (y=0;y<12;y++)
+    {
+      gx=(x)*gsf*10;
+      gy=(y)*gsf*10;
+      
+      currentTile=tiles.get(tileIndex);
+      //println("Getting tile:"+tileIndex+" "+gx+","+gy+" "+x+","+y+" "+(gx+((gsf*10)/2))+","+(gy+((gsf*10)/2)));
+      currentTile.updateGfx(gx,gy);
+
+      tileIndex++;
+    }
+  }
+}
+
+void drawTiles() {  
   int x,y,i;
   int tileIndex=0;
   background(255);
@@ -151,20 +317,22 @@ void draw() {
 
   String s;
   
-  int dl=4;
+  int dl=5;
+
       
+  tileIndex=0;
   for (x=0;x<12;x++)
   {
     for (y=0;y<12;y++)
     {
-      s=new String();
-      gx=(x)*gsf*10;
-      gy=(y)*gsf*10;
-      
       currentTile=tiles.get(tileIndex);
-      //println("Getting tile:"+tileIndex+" "+gx+","+gy+" "+x+","+y+" "+(gx+((gsf*10)/2))+","+(gy+((gsf*10)/2)));
-      currentTile.updateGfx(gx,gy);
+      gx=currentTile.gx;
+      gy=currentTile.gy;
+      //s=new String("["+currentTile.alNumber+"]");
+      s=new String();
 
+
+      // Draw tiles
       s=Integer.toString(tileIndex);
       
       fill(200,200,200);
@@ -181,34 +349,25 @@ void draw() {
         currentTile.drawTile(gx,gy);
       }
 
-      tileIndex++;
-    }
-  }
+
+      stroke(255,0,255);
+      strokeWeight(3);
   
 
-  tileIndex=0;
-  stroke(255,0,255);
-  strokeWeight(3);
-  for (x=0;x<12;x++)
-  {
-    for (y=0;y<12;y++)
-    {
-      currentTile=tiles.get(tileIndex);
-      //s=new String("["+currentTile.alNumber+"]");
-      s=new String();
-
-
+      // Draw connector lines
       for (i=0;i<currentTile.borderList.commonBordersFound();i++)
       {
         destTile=tiles.get(currentTile.borderList.getBorderByIndex(i));
         s+=","+Integer.toString(currentTile.borderList.getBorderByIndex(i));
         
-        if (currentTile.borderList.commonBordersFound()<3)
+        if (currentTile.borderList.commonBordersFound()<4)
         {
           line(currentTile.gx,currentTile.gy,destTile.gx,destTile.gy);
         }
       }
+
       
+      // Draw connection text
       //text(s,currentTile.gx+(gsf*10), currentTile.gy+(gsf*11));
       if (currentTile.borderList.commonBordersFound()<dl)
       {
@@ -219,7 +378,19 @@ void draw() {
       tileIndex++;
     }
   }
-  noLoop();
+}
+
+public boolean tileInList(ArrayList<PictureTile> tl, PictureTile t)
+{
+  int j=0;
+  for (j=0;j<tl.size();j++)
+  {
+    if (tl.get(j)==t)
+    {
+      return(true);
+    }
+  }
+  return(false);
 }
 
 public class BorderListContainer
@@ -237,11 +408,20 @@ public class BorderListContainer
     {
       if (bl.get(j)==newBorder)
       {
-        println("throwing away duplicate:"+newBorder);
         return;
       }
     }
     bl.add(newBorder);
+  }
+
+  public void printBorders()
+  {
+    int j=0;
+    print("Borders:");
+    for (j=0;j<bl.size();j++)
+    {
+      print(bl.get(j)+",");
+    }
   }
   
   public int commonBordersFound()
@@ -292,7 +472,7 @@ public class PictureTile
       content[i]=temp[i];
     }
     buildBorders();
-    print("F");
+    //print("F");
   }
 
   public void rotateLeft90()
@@ -331,7 +511,7 @@ public class PictureTile
       content[i]=temp[i];
     }
     buildBorders();
-    print("R");
+    //print("R");
   }
 
   public void drawTile(int xoffset, int yoffset)
@@ -409,35 +589,32 @@ public class PictureTile
     //printBorders();
   }
 
-  public boolean justCheckBorders(PictureTile t)
-  {
-    int i=0;
+  //public boolean justCheckBorders(PictureTile t)
+  //{
+  //  int i=0;
 
-    for (i=0;i<4;i++)
-    {
-      if (checkBorders(t)==true)
-      {
-        return(true);
-      }
-    }    
-    return(false);
-  }  
+  //  for (i=0;i<4;i++)
+  //  {
+  //    if (checkBorders(t)==true)
+  //    {
+  //      return(true);
+  //    }
+  //  }    
+  //  return(false);
+  //}  
 
   // transform the tile and test to see if any borders match
-  public boolean transformToAlignWith(PictureTile t)
+  public int transformToAlignWith(PictureTile t)
   {
-    boolean commonBordersFound=false;
-
-print("xform:");
+    int commonBorder=-1;
 
     // Rotate through 360 degrees, testing each combo at 90
     // if we find a solution we return, if we dont then the
     // tile will return to its original position
-    commonBordersFound=rotateAndCheck(t);
-    if (commonBordersFound==true)
+    commonBorder=rotateAndCheck(t);
+    if (commonBorder>=0)
     {
-      println(commonBordersFound);
-      return(commonBordersFound);
+      return(commonBorder);
     }
     
     // If none of the original rotations work, lets flip
@@ -446,11 +623,10 @@ print("xform:");
     
     // Run through a series of rotations again, same deal
     // as before.
-    commonBordersFound=rotateAndCheck(t);
-    if (commonBordersFound==true)
+    commonBorder=rotateAndCheck(t);
+    if (commonBorder>=0)
     {
-      println(commonBordersFound);
-      return(commonBordersFound);
+      return(commonBorder);
     }
     
     // If we get to here, then we're out of permutations,
@@ -459,22 +635,22 @@ print("xform:");
     // a steady state and easier to debug
     flipTileVert();
     
-    return(false);
+    return(-1);
   }
   
-  public boolean rotateAndCheck(PictureTile t)
+  public int rotateAndCheck(PictureTile t)
   {
     int i=0;
-    boolean result=false;
+    int result=-1;
 
     // Rotate for 4 turns of 90 degrees
     for (i=0;i<4;i++)
     {
       // check to see if any of the current
       // borders match
-      if (checkBorders(t)==true)
+      result=checkBorders(t);
+      if (result>=0)
       {
-        result=true;
         return(result);
       }
       
@@ -486,9 +662,8 @@ print("xform:");
 
   // Check for adjacent tiles that have a common border pattern,
   // check left, right, below and above.
-  public boolean checkBorders(PictureTile t)
+  public int checkBorders(PictureTile t)
   {
-    boolean result=false;
     // See if this pair of tiles align on any cardinal edges
     //borders[0][i]=content[0][i]; // left border
     //borders[1][i]=content[9][i]; // right border
@@ -501,8 +676,7 @@ print("xform:");
       borderList.addBorderIfNew(t.alNumber);
       t.borderList.addBorderIfNew(this.alNumber);
       // we are to the left of t
-      result=true;
-      return(result);
+      return(1);
 
     }
     // Right v Left
@@ -511,8 +685,7 @@ print("xform:");
       borderList.addBorderIfNew(t.alNumber);
       t.borderList.addBorderIfNew(this.alNumber);
       // we are to the right of t
-      result=true;
-      return(result);
+      return(0);
 
     }
     // top v Bottom
@@ -521,8 +694,7 @@ print("xform:");
       borderList.addBorderIfNew(t.alNumber);
       t.borderList.addBorderIfNew(this.alNumber);
       // we are below t
-      result=true;
-      return(result);
+      return(3);
 
     }
     // Bottom v Top
@@ -531,12 +703,11 @@ print("xform:");
       borderList.addBorderIfNew(t.alNumber);
       t.borderList.addBorderIfNew(this.alNumber);
       // we are above t
-      result=true;
-      return(result);
+      return(2);
 
     }
     
-    return(result);
+    return(-1);
   }
   
   // This simply does a "string" style char by char match between the 2 border arrays
